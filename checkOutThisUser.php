@@ -1,7 +1,19 @@
 <?php
+
 if(!isset($_SESSION))
     session_start();
     include 'includeSession.php';
+
+include dirname(dirname(__FILE__)) . '/sanjay/config/config.php';
+$postParams = Functions::getPostParams();
+if ($postParams['action'] == 'checkout') {
+    $id = $postParams['checkoutId'];
+    $userDataHandlerObj = new userDataHandler();
+    $result = $userDataHandlerObj->getCompleteStatusById($id);
+}
+
+isset($result[0]) ? $data = $result[0] : '';
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -56,7 +68,12 @@ if(!isset($_SESSION))
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="table-responsive">
-                                <form method="Post" action="DoCheckout" id="formId">
+                                <form method="Post" action="action/action.php" id="formId">
+                                    <input type="hidden" name="action" value="checkOutUser">
+                                    <input type="hidden" name="userId" value="<?php if(isset($data['id']))  echo $data['id'];else echo '';?>">
+                                    <input type="hidden" name="roomNumberAllotted" value="<?php if(isset($data['roomNumberAllotted']))  echo $data['roomNumberAllotted'];else echo '';?>">
+                                    <input type="hidden" name="numberOfPeople" value="<?php if(isset($data['numberOfPeople']))  echo $data['numberOfPeople'];else echo '';?>">
+                                    <input type="hidden" name="city" value="<?php if(isset($data['city']))  echo $data['city'];else echo '';?>">
                                     <table class="table table-bordered table-hover">
                                         <thead>
                                             <tr>
@@ -72,14 +89,14 @@ if(!isset($_SESSION))
                                         </thead>
                                         <tbody>
                                             <tr id="checkoutDetail" name="checkoutDetail">
-                                                <td id="checkoutId" name="checkoutId">1</td>
-                                                <td id="name" name="name">Sanjay </td>
-                                                <td id="contact" name="contact">99999999999</td>
-                                                <td id="city" name="city">Jaipur</td>
-                                                <td id="coming_date" name="coming_date">26/09/2016</td>
-                                                <td id="return_date" name="return_date">27/09/2016</td>
-                                                <td id="head_count" name="head_count">10</td>
-                                                <td id="room_alloted" name="room_alloted">201</td>
+                                                <td id="checkoutId" name="checkoutId"><?php if(isset($data['id']))  echo $data['id'];else echo '';?></td>
+                                                <td id="name" name="name"><?php if(isset($data['name']))echo $data['name'];else echo '';?> </td>
+                                                <td id="contact" name="contact"><?php if(isset($data['phoneNumber']))echo $data['phoneNumber'];else echo '';?></td>
+                                                <td id="city" name="city"><?php if(isset($data['city']))echo $data['city'];else echo '';?></td>
+                                                <td id="coming_date" name="coming_date"><?php if(isset($data['dateOfArrival']))echo $data['dateOfArrival'];else echo '';?></td>
+                                                <td id="return_date" name="return_date"><?php if(isset($data['dateOfDeparture']))echo $data['dateOfDeparture'];else echo '';?></td>
+                                                <td id="head_count" name="head_count"><?php if(isset($data['numberOfPeople']))echo $data['numberOfPeople'];else echo '';?></td>
+                                                <td id="room_alloted" name="room_alloted"><?php if(isset($data['roomNumberAllotted']))echo $data['roomNumberAllotted'];else echo '';?></td>
                                             </tr>
                                         </tbody>
                                     </table>

@@ -37,6 +37,10 @@ if(!isset($_SESSION))
 <body>
 
     <div id="wrapper">
+<<<<<<< HEAD
+=======
+
+>>>>>>> cc4f7659ea3746e63e714b4fea8baee1c140abb9
         <?php include_once 'leftSidebar.php';?>
 
         <div id="page-wrapper">

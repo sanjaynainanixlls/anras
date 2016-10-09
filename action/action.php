@@ -33,15 +33,24 @@ class Action {
                 }
         } else if ($this->postParams['action'] == 'roomAllocation') {
                 $userDataHandlerObj = new userDataHandler();
-            $result = $userDataHandlerObj->allocateRoom($this->postParams);
+                $result = $userDataHandlerObj->allocateRoom($this->postParams);
             if (TRUE) {
                 header("location: ../completeStatus.php");
                 }
             }
-            
-            else if($this->postParams['action'] == 'checkoutData'){
+
+            else if($this->postParams['action'] == 'checkOutUser'){
                 $userDataHandlerObj = new userDataHandler();
                 $result = $userDataHandlerObj->checkOutUser($this->postParams);
+                if($result['status'] == 1){
+                    debug($_SESSION);
+                    if($_SESSION['role'] == 'ADMIN'){
+                        header("location: ../home.php");
+                    }
+                    elseif ($_SESSION['role'] == 'RECEPTION') {
+                        header("location: ../dataEntry.php");
+                }
+                }
             }
             
             else if($this->postParams['action'] == 'addNewUser'){
