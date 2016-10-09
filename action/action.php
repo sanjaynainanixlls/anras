@@ -86,8 +86,7 @@ class Action {
                     header("location: ../dataEntry.php");
                 }
             }
-            
-            else if ($this->postParams['action'] == 'allotInventory') {
+        } else if ($this->postParams['action'] == 'allotInventory') {
                 $userDataHandlerObj = new userDataHandler();
                 $result = $userDataHandlerObj->allotInventoryToUser($this->postParams);
             if (!empty($result)) {
@@ -95,7 +94,6 @@ class Action {
                 $_SESSION['message'] = "Inventory Alloted to User: ".$result[0].', Please Collect '.$result[1].' INR';
                 header("location: ../inventoryById.php");
                 }
-            }
         }
     }
 
