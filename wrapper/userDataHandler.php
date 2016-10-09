@@ -59,6 +59,17 @@ class userDataHandler {
 //           $query2 = ""
 //        }
 //    }
+    
+    public function addNewUser($data){
+        $query = "SELECT username FROM user WHERE username ='".$data['username']."'";
+        $result = queryRunner::doSelect($query);
+        if(empty($result)){
+            $query = "INSERT into user (name,username,password,role) values ('".$data['name']."','".$data['username']."','".$data['password']."','".$data['role']."')";
+            $result = queryRunner::doInsert($query);
+            return $result;
+        }
+        return false;
+    }
 }
 
 ?>

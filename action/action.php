@@ -5,9 +5,9 @@ class Action {
 
     private $postParams;
 
-    public function execute() {
+    public function execute() { 
         $this->postParams = Functions::getPostParams();
-        if ($this->postParams['action'] == 'login') {
+        if ($this->postParams['action'] == 'login') {   
                 $userDataHandlerObj = new userDataHandler();
                 $result = $userDataHandlerObj->authenticateUser($this->postParams['username'], $this->postParams['pwd']);
                 if (!empty($result)) {
@@ -16,8 +16,9 @@ class Action {
                     $_SESSION["userId"] = $result[0]['id'];
                     if(isset($_SESSION['role']) && $_SESSION['role'] == 'ADMIN')
                         header("location: ../home.php");
-                    else if(isset($_SESSION['role']) && $_SESSION['role'] == 'RECEPTION')
+                    else if(isset($_SESSION['role']) && $_SESSION['role'] == 'RECEPTION'){
                         header("location: ../dataEntry.php");
+                    }
                 } else {
                     $_SESSION['error'] = "Invalid Username or Password!";
                     header("location: ../index.php");
@@ -26,6 +27,8 @@ class Action {
                 $userDataHandlerObj = new userDataHandler();
                 $result = $userDataHandlerObj->registerUser($this->postParams);
                 if (!empty($result)) {
+                    session_start();
+                    $_SESSION['message'] = "New User Added Successfully";
                     header("location: ../dataEntry.php");
                 }
         } else if ($this->postParams['action'] == 'roomAllocation') {
@@ -35,9 +38,24 @@ class Action {
                 header("location: ../completeStatus.php");
                 }
             }
+            
             else if($this->postParams['action'] == 'checkoutData'){
                 $userDataHandlerObj = new userDataHandler();
                 $result = $userDataHandlerObj->checkOutUser($this->postParams);
+            }
+            
+            else if($this->postParams['action'] == 'addNewUser'){
+                $userDataHandlerObj = new userDataHandler();
+                $result = $userDataHandlerObj->addNewUser($this->postParams);
+                if($result){
+                    session_start();
+                    $_SESSION['message'] = "New User Added Successfully";
+                    header("location: ../home.php");
+                } else {
+                    session_start();
+                    $_SESSION['message'] = "User Name Already Exists!!!";
+                    header("location: ../addUser.php");
+                }
             }
         }
         

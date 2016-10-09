@@ -23,7 +23,7 @@ class connection{
                 //$user = config::getUser();
                 //$pass = config::getPassword();
                 $host = "127.0.0.1";
-                $db = 'anra';//"admito_test";
+                $db = 'anra';
                 $user = "root";
                 $pass = "";
 		$this->_connection = new mysqli($host,$user,$pass,$db);

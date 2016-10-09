@@ -1,6 +1,8 @@
 <?php
+if(!isset($_SESSION))
+    session_start();
 include 'includeSession.php';
-include dirname(dirname(__FILE__)) . '/sanjay/action/completeStatusAction.php';
+include dirname(dirname(__FILE__)) . '/anras/action/completeStatusAction.php';
 $completeStausObj = new CompleteStatus();
 $data = $completeStausObj->getComStatus();
 ?>

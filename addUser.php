@@ -1,4 +1,6 @@
 <?php
+if(!isset($_SESSION))
+    session_start();
     include 'includeSession.php';
 ?>
 <!DOCTYPE html>
@@ -23,68 +25,12 @@
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
 </head>
 
 <body>
 
     <div id="wrapper">
-
-        <!-- Navigation -->
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="index.jsp">S.S.D.N.</a>
-            </div>
-            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-            <div class="collapse navbar-collapse navbar-ex1-collapse">
-                <ul class="nav navbar-nav side-nav">
-                    <li class="active">
-                        <a href="index.jsp"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
-                    </li>
-                    <li>
-                        <a href="Register"><i class="fa fa-fw fa-plus"></i> Allot A New Room</a>
-                    </li>
-                    <li>
-                        <a href="Checkout"><i class="fa fa-fw fa-minus"></i> Checkout A Room</a>
-                    </li>
-                    <li>
-                        <a href="EditInformation"><i class="fa fa-fw fa-pencil"></i> Edit Information</a>
-                    </li>
-                    <li>
-                        <a href="CompleteStatus"><i class="fa fa-fw fa-list"></i> Complete Status</a>
-                    </li>
-                    <li>
-                         <a href="RoomStatus"><i class="fa fa-fw fa-th-list"></i> Room Status</a>
-                    </li>
-                    <li>
-                         <a href="floorPlans.html"><i class="fa fa-fw fa-map-marker"></i> Floor Plans</a>
-                    </li>
-                    <li>
-                         <a href="TodaysCheckouts"><i class="fa fa-fw fa-calendar"></i> Today's Checkouts</a>
-                    </li>
-                    <li>
-                         <a href="AllCheckouts"><i class="fa fa-fw fa-calendar"></i> All Checkouts</a>
-                    </li>
-                    <li>
-                         <a href="NotCheckedOut"><i class="fa fa-fw fa-calendar"></i> Not Checked Out</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </nav>
+    <?php include_once 'leftSidebar.php';?>
 
         <div id="page-wrapper">
 
@@ -107,30 +53,39 @@
                     </div>
                 </div>
                 <!-- /.row -->
-
+                <?php if (isset($_SESSION['message']) && $_SESSION['message'] != '') {?>
+                        <div class="alert alert-error fade in">
+                            <a href="#" class="close" data-dismiss="alert">&times;</a>
+                            <strong>Error !</strong> <?php echo $_SESSION['message']; ?>
+                        </div>
+                    <?php } unset($_SESSION['message']);  ?>
                 <div class="row">
                     <div class="col-lg-6 col-lg-offset-3">
 
-                        <form role="form" action="Register" method="post">
-
+                        <form role="form" action="action/action.php" method="post">
+                            <input type="hidden" name="action" value='addNewUser'>
                             <div class="form-group">
                                 <label>Name</label>
-                                <input type="text"  class="form-control" name="name" required="required">
+                                <input type="text" id="name" class="form-control" name="name" required="required">
                             </div>
-
                             <div class="form-group">
                                 <label>User Name</label>
-                                <input type="text"  class="form-control" name="city" required="required">
+                                <input type="text" id="username" class="form-control" name="username" required="required">
                             </div>
+
+<!--                            <div class="form-group">
+                                <label>City</label>
+                                <input type="text" id="city" class="form-control" name="city" required="required">
+                            </div>-->
                             
                             <div class="form-group">
                                 <label>Password</label>
-                                <input type="tel"  class="form-control" name="phoneNumber" required="required">
+                                <input type="password" id="password" class="form-control" name="password" required="required">
                             </div>
                             
                             <div class="form-group">
                             	<label>Select Role</label>
-                            	<select class="form-control" id="bhawanSelect">
+                            	<select class="form-control" id="role" name="role">
                             		<option value="DE">Data Entry</option>
                             		<option value="IA">Inventory-Allotment</option>
                             	</select>
@@ -164,7 +119,7 @@
     
     <!-- Additional JavaScript -->
 	<script src="js/script.js"></script>
-	
+	<script src="js/addUser.js"></script>
 	<script src="js/roomStatus.js"></script>
 
 </body>

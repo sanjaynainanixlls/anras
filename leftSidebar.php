@@ -38,7 +38,7 @@ if (!isset($_SESSION)) {
                     <a href="checkout.php"><i class="fa fa-fw fa-minus"></i> Checkout A Room</a>
                 </li>
                 <li>
-                    <a href="EditInformation"><i class="fa fa-fw fa-pencil"></i> Edit Information</a>
+                    <a href="#"><i class="fa fa-fw fa-pencil"></i> Edit Information</a>
                 </li>
                 <li>
                     <a href="completeStatus.php"><i class="fa fa-fw fa-list"></i> Complete Status</a>
@@ -50,16 +50,16 @@ if (!isset($_SESSION)) {
                     <a href="floorPlans.html"><i class="fa fa-fw fa-map-marker"></i> Floor Plans</a>
                 </li>
                 <li>
-                    <a href="TodaysCheckouts"><i class="fa fa-fw fa-calendar"></i> Today's Checkouts</a>
+                    <a href="#"><i class="fa fa-fw fa-calendar"></i> Today's Checkouts</a>
                 </li>
                 <li>
-                    <a href="AllCheckouts"><i class="fa fa-fw fa-calendar"></i> All Checkouts</a>
+                    <a href="#"><i class="fa fa-fw fa-calendar"></i> All Checkouts</a>
                 </li>
                 <li>
-                    <a href="NotCheckedOut"><i class="fa fa-fw fa-calendar"></i> Not Checkouted Out</a>
+                    <a href="#"><i class="fa fa-fw fa-calendar"></i> Not Checked Out</a>
                 </li>
                 <li>
-                    <a href="addNewUser"><i class="fa fa-fw fa-calendar"></i> Add New User</a>
+                    <a href="addUser.php"><i class="fa fa-fw fa-user"></i> Add New User</a>
                 </li>
                 <?php
             } else if (isset($_SESSION['role']) && $_SESSION['role'] == 'RECEPTION') {
@@ -73,6 +73,11 @@ if (!isset($_SESSION)) {
                 <li>
                     <a href="roomStatus.php"><i class="fa fa-fw fa-th-list"></i> Room Status</a>
                 </li>
+            <?php } else if (isset($_SESSION['role']) && $_SESSION['role'] == 'INVENTORY') { ?>
+                <li>
+                    <a href="#"><i class="fa fa-fw fa-plus"></i>Allot Inventory</a>
+                </li>
+                
             <?php } ?>
         </ul>
     </div>
