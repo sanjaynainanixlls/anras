@@ -3,7 +3,7 @@ if (!isset($_SESSION)) {
     session_start();
 }
 
-    include 'includeSession.php';
+    //include 'includeSession.php';
 ?>
 <!-- Navigation -->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">

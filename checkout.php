@@ -65,11 +65,13 @@
 
                         <div class="form-group col-lg-4 col-lg-offset-4">
                             <label>Please Enter the ID</label>
-                            <input type="hidden" id="checkout" name="checkout" value="checkout">
+                            <form method="post" action="checkOutThisUser.php">
+                            <input type="hidden" id="checkout" name="action" value="checkout">
                             <input id="checkoutID" type="number"  class="form-control" name="checkoutId" required="required" style="margin-bottom:20px">
 
                         <button id="checkoutSubmit" type="submit" class="btn btn-success">Submit</button>
                         <button type="reset" class="btn btn-warning">Reset</button>
+                            </form>
                         </div>
 
                     </div>

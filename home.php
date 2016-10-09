@@ -1,6 +1,4 @@
-<?php
-    include 'includeSession.php';
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 

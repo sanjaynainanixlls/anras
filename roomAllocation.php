@@ -7,7 +7,8 @@ $postParams = Functions::getPostParams();
             $userDataHandlerObj = new userDataHandler();
             $result = $userDataHandlerObj->getCompleteStatusById($id);
         }
-        $data = $result[0];
+        
+        isset($result[0]) ?$data = $result[0]: '';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -45,54 +46,7 @@ $postParams = Functions::getPostParams();
     <div id="wrapper">
 
         <!-- Navigation -->
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="index.jsp">S.S.D.N.</a>
-            </div>
-            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-            <div class="collapse navbar-collapse navbar-ex1-collapse">
-                <ul class="nav navbar-nav side-nav">
-                    <li class="active">
-                        <a href="index.jsp"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
-                    </li>
-                    <li>
-                        <a href="Register"><i class="fa fa-fw fa-plus"></i> Allot A New Room</a>
-                    </li>
-                    <li>
-                        <a href="Checkout"><i class="fa fa-fw fa-minus"></i> Checkout A Room</a>
-                    </li>
-                    <li>
-                        <a href="EditInformation"><i class="fa fa-fw fa-pencil"></i> Edit Information</a>
-                    </li>
-                    <li>
-                        <a href="CompleteStatus"><i class="fa fa-fw fa-list"></i> Complete Status</a>
-                    </li>
-                    <li>
-                         <a href="RoomStatus"><i class="fa fa-fw fa-th-list"></i> Room Status</a>
-                    </li>
-                    <li>
-                         <a href="floorPlans.html"><i class="fa fa-fw fa-map-marker"></i> Floor Plans</a>
-                    </li>
-                    <li>
-                         <a href="TodaysCheckouts"><i class="fa fa-fw fa-calendar"></i> Today's Checkouts</a>
-                    </li>
-                    <li>
-                         <a href="AllCheckouts"><i class="fa fa-fw fa-calendar"></i> All Checkouts</a>
-                    </li>
-                    <li>
-                         <a href="NotCheckedOut"><i class="fa fa-fw fa-calendar"></i> Not Checked Out</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </nav>
+         <?php include_once 'leftSidebar.php';?>
 
         <div id="page-wrapper">
 
@@ -121,35 +75,35 @@ $postParams = Functions::getPostParams();
 
                         <form role="form" action="action/action.php" method="post">
                             <input type="hidden" name="action" value='roomAllocation'>
-                            <input type="hidden" name="id" value="<?php echo $data['id']?>">
+                            <input type="hidden" name="id" value="<?php if(isset($data['id']))  echo $data['id'];else echo '';?>">
                             <div class="form-group">
                                 <label>Name</label>
-                                <input type="text"  class="form-control" name="name" value="<?php echo $data['name']?>" required="required">
+                                <input type="text"  class="form-control" name="name" value="<?php if(isset($data['name']))echo $data['name'];else echo '';?>" required="required">
                             </div>
 
                             <div class="form-group">
                                 <label>City</label>
-                                <input type="text"  class="form-control" name="city" value="<?php echo $data['city']?>" required="required">
+                                <input type="text"  class="form-control" name="city" value="<?php if(isset($data['city']))echo $data['city'];else echo '';?>" required="required">
                             </div>
                             
                             <div class="form-group">
                                 <label>Mobile Number</label>
-                                <input type="tel"  class="form-control" name="phoneNumber" value="<?php echo $data['phoneNumber']?>" required="required">
+                                <input type="tel"  class="form-control" name="phoneNumber" value="<?php if(isset($data['phoneNumber']))echo $data['phoneNumber']; else echo '';?>" required="required">
                             </div>
                             
                             <div class="form-group">
                                 <label>Total Number of Bhagats</label>
-                                <input type="number" class="form-control" name="numberOfPeople" value="<?php echo $data['numberOfPeople']?>" required="required">
+                                <input type="number" class="form-control" name="numberOfPeople" value="<?php if(isset($data['numberOfPeople']))echo $data['numberOfPeople']; echo '';?>" required="required">
                             </div>
  							
  							<div class="form-group">
                                 <label>Date of Arrival</label>
-                                <input id="comingDate" type="date" class="form-control" name="comingDate" value="<?php echo $data['dateOfArrival']?>" required="required">
+                                <input id="comingDate" type="date" class="form-control" name="comingDate" value="<?php if(isset($data['dateOfArrival']))echo $data['dateOfArrival'];else echo '';?>" required="required">
                             </div>
  							                           
                             <div class="form-group">
                                 <label>Date of Return</label>
-                                <input type="date" class="form-control" name="returnDate" value="<?php echo $data['dateOfDeparture']?>" required="required">
+                                <input type="date" class="form-control" name="returnDate" value="<?php if(isset($data['dateOfDeparture']))echo $data['dateOfDeparture'];else echo '';?>" required="required">
                             </div>
                             
                             <div class="form-group">
