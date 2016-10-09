@@ -86,8 +86,8 @@ if(!isset($_SESSION))
                             <div class="form-group">
                             	<label>Select Role</label>
                             	<select class="form-control" id="role" name="role">
-                            		<option value="DE">Data Entry</option>
-                            		<option value="IA">Inventory-Allotment</option>
+                            		<option value="RECEPTION">Data Entry</option>
+                            		<option value="INVENTORY">Inventory-Allotment</option>
                             	</select>
                             </div>
                             

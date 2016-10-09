@@ -1,6 +1,5 @@
-
 <?php
-if (!isset($_SESSION))
+if(!isset($_SESSION))
     session_start();
 include 'includeSession.php';
 ?>
@@ -96,7 +95,7 @@ include 'includeSession.php';
                                     </div>
                                 </div>
                             </div></a>
-                        <a href="completeStatus.php"><div class="col-lg-6 col-md-6">
+                        <a href="roomStatus.php"><div class="col-lg-6 col-md-6">
                                 <div class="panel panel-primary">
                                     <div class="panel-heading text-center">
                                         <div class="row">
