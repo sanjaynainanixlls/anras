@@ -50,13 +50,13 @@ if (!isset($_SESSION)) {
                     <a href="floorPlans.html"><i class="fa fa-fw fa-map-marker"></i> Floor Plans</a>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-fw fa-calendar"></i> Today's Checkouts</a>
+                    <a href="todaysCheckouts.php"><i class="fa fa-fw fa-calendar"></i> Today's Checkouts</a>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-fw fa-calendar"></i> All Checkouts</a>
+                    <a href="allCheckouts.php"><i class="fa fa-fw fa-calendar"></i> All Checkouts</a>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-fw fa-calendar"></i> Not Checked Out</a>
+                    <a href="notCheckedOut.php"><i class="fa fa-fw fa-calendar"></i> Not Checked Out</a>
                 </li>
                 <li>
                     <a href="addUser.php"><i class="fa fa-fw fa-user"></i> Add New User</a>

@@ -107,7 +107,7 @@ $data = $completeStausObj->getComStatus();
                                                 <td class="completeStatusTableRowRoomAlloted"><?php
                                                     if (($value['roomNumberAllotted'] != '')) {
                                                 echo $value['roomNumberAllotted'];
-                                                    } else {
+                                                    } else if($_SESSION['role'] == "ADMIN"){
                                                         $html = "<form action='roomAllocation.php' method='post'>";
                                                         $html .='<input type="hidden" name ="userId" value="' . $value['id'] . '">';
                                                         $html .='<input type="hidden" name="action" value="completeStatus">';

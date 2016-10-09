@@ -84,6 +84,60 @@ class userDataHandler {
         return false;
     }
 
+    public function allRoomStatus() {
+        $query = "SELECT * FROM rooms";
+        $result = queryRunner::doSelect($query);
+        if (!empty($result)) {
+            return $result;
+        } else {
+            return FALSE;
+        }
+    }
+
+    public function todayCheckOutData() {
+        $today = date('d/n/Y');
+        $query = "SELECT * FROM guest WHERE dateOfDeparture = '" . $today . "' AND isCheckout = '0'";
+        $result = queryRunner::doSelect($query);
+        if (!empty($result)) {
+            return $result;
+        } else {
+            return FALSE;
+        }
+    }
+
+    public function checkoutUsers($data) {
+        $city = '';
+        if ((isset($data['id']) && !empty($data['id']))) {
+            $query1 = "UPDATE guest SET isCheckout = '1' WHERE id IN ('" . implode("','", $data['id']) . "')";
+            $userData = queryRunner::doUpdate($query1);
+            if ($userData['status'] == 1) {
+                for ($i = 0; $i < count($data['roomNumberAllotted']); $i++) {
+                    $sql1 = "SELECT city FROM guest WHERE roomNumberAllotted = '" . $data['roomNumberAllotted'][$i] . "' AND isCheckout = '0'";
+                    $cityData = queryRunner::doSelect($sql1);
+                    $city = '';
+                    for ($j = 0; $j < count($cityData); $j++) {
+                        $city .= $cityData[$j]['city'] . ",";
+                    }
+                    $city = rtrim($city, ",");
+                    $qry = "update rooms set occupied = occupied - " . $data['numberOfPeople'][$i] . " , city = '" . $city . "' where roomNumber = '" . $data['roomNumberAllotted'][$i] . "'";
+                    $res = queryRunner::doUpdate($qry);
+                    unset($cityData);
+                }
+                return $res;
+            }
+        }
+    }
+
+    public function allCheckOutData() {
+        $query = "SELECT * FROM guest WHERE isCheckout = '0'";
+        $result = queryRunner::doSelect($query);
+        if (!empty($result)) {
+            return $result;
+        } else {
+            return FALSE;
+        }
+    }
+
 }
 
 ?>

@@ -69,7 +69,7 @@ include 'includeSession.php';
                         </div>
                     <?php } unset($_SESSION['message']);?>
                     <div class="row">
-                        <a href="Register"><div class="col-lg-6 col-md-6">
+                        <a href="roomAllocation.php"><div class="col-lg-6 col-md-6">
                                 <div class="panel panel-primary">
                                     <div class="panel-heading text-center">
                                         <div class="row">
@@ -78,7 +78,7 @@ include 'includeSession.php';
                                     </div>
                                 </div>
                             </div></a>
-                        <a href="Checkout"><div class="col-lg-6 col-md-6">
+                        <a href="checkout.php"><div class="col-lg-6 col-md-6">
                                 <div class="panel panel-primary">
                                     <div class="panel-heading text-center">
                                         <div class="row">
@@ -87,7 +87,7 @@ include 'includeSession.php';
                                     </div>
                                 </div>
                             </div></a>
-                        <a href="CompleteStatus"><div class="col-lg-6 col-md-6">
+                        <a href="completeStatus.php"><div class="col-lg-6 col-md-6">
                                 <div class="panel panel-primary">
                                     <div class="panel-heading text-center">
                                         <div class="row">
@@ -96,7 +96,7 @@ include 'includeSession.php';
                                     </div>
                                 </div>
                             </div></a>
-                        <a href="RoomStatus"><div class="col-lg-6 col-md-6">
+                        <a href="completeStatus.php"><div class="col-lg-6 col-md-6">
                                 <div class="panel panel-primary">
                                     <div class="panel-heading text-center">
                                         <div class="row">

@@ -85,6 +85,7 @@ isset($result[0]) ? $data = $result[0] : '';
                                                 <th>Return Date</th>
                                                 <th>Number Of People</th>
                                                 <th>Room Number Alloted</th>
+                                                <th>Amount Paid</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -97,12 +98,13 @@ isset($result[0]) ? $data = $result[0] : '';
                                                 <td id="return_date" name="return_date"><?php if(isset($data['dateOfDeparture']))echo $data['dateOfDeparture'];else echo '';?></td>
                                                 <td id="head_count" name="head_count"><?php if(isset($data['numberOfPeople']))echo $data['numberOfPeople'];else echo '';?></td>
                                                 <td id="room_alloted" name="room_alloted"><?php if(isset($data['roomNumberAllotted']))echo $data['roomNumberAllotted'];else echo '';?></td>
+                                                <td id="amountPaid" name="amountPaid"><?php if(isset($data['amountPaid']))echo $data['amountPaid'];else echo '';?></td>
                                             </tr>
                                         </tbody>
                                     </table>
                                     <button type="Submit"  class="btn btn-success">Checkout Now</button>
                                 </form>
-                                <a href="Checkout"><button  class="btn btn-warning text-center" style="margin-top:20px;">Search Again</button></a>
+                                <a href="checkout.php"><button  class="btn btn-warning text-center" style="margin-top:20px;">Search Again</button></a>
                             </div>
 
 

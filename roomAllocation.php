@@ -96,7 +96,7 @@ $postParams = Functions::getPostParams();
                                 <input type="number" class="form-control" name="numberOfPeople" value="<?php if(isset($data['numberOfPeople']))echo $data['numberOfPeople']; echo '';?>" required="required">
                             </div>
  							
- 							<div class="form-group">
+                            <div class="form-group">
                                 <label>Date of Arrival</label>
                                 <input id="comingDate" type="date" class="form-control" name="comingDate" value="<?php if(isset($data['dateOfArrival']))echo $data['dateOfArrival'];else echo '';?>" required="required">
                             </div>
@@ -104,14 +104,6 @@ $postParams = Functions::getPostParams();
                             <div class="form-group">
                                 <label>Date of Return</label>
                                 <input type="date" class="form-control" name="returnDate" value="<?php if(isset($data['dateOfDeparture']))echo $data['dateOfDeparture'];else echo '';?>" required="required">
-                            </div>
-                            
-                            <div class="form-group">
-                            	<label>Select Bhawan</label>
-                            	<select class="form-control" id="bhawanSelect">
-                            		<option value="AN">Anand Niwas</option>
-                            		<option value="AS">Ashish Sadan</option>
-                            	</select>
                             </div>
                             
                                                         
