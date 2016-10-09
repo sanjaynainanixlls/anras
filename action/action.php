@@ -19,6 +19,9 @@ class Action {
                     else if(isset($_SESSION['role']) && $_SESSION['role'] == 'RECEPTION'){
                         header("location: ../dataEntry.php");
                     }
+                    else if(isset($_SESSION['role']) && $_SESSION['role'] == 'INVENTORY'){
+                        header("location: ../inventoryById.php");
+                    }
                 } else {
                     $_SESSION['error'] = "Invalid Username or Password!";
                     header("location: ../index.php");
@@ -28,7 +31,7 @@ class Action {
                 $result = $userDataHandlerObj->registerUser($this->postParams);
                 if (!empty($result)) {
                     session_start();
-                    $_SESSION['message'] = "New User Added Successfully";
+                    $_SESSION['message'] = "User with ID: ".$result[0]['id']." Added Successfully!";
                     header("location: ../dataEntry.php");
                 }
         } else if ($this->postParams['action'] == 'roomAllocation') {
@@ -64,6 +67,16 @@ class Action {
                     session_start();
                     $_SESSION['message'] = "User Name Already Exists!!!";
                     header("location: ../addUser.php");
+                }
+            }
+            
+            else if ($this->postParams['action'] == 'allotInventory') {
+                $userDataHandlerObj = new userDataHandler();
+                $result = $userDataHandlerObj->allotInventoryToUser($this->postParams);
+            if (!empty($result)) {
+                session_start();
+                $_SESSION['message'] = "Inventory Alloted to User: ".$result[0].', Please Collect '.$result[1].' INR';
+                header("location: ../inventoryById.php");
                 }
             }
         }

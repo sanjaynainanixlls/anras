@@ -13,8 +13,11 @@ class userDataHandler {
         $query = 'INSERT INTO guest (name,phoneNumber,city,numberOfPeople,dateOfArrival,dateOfDeparture,amountPaid,createdBy,createdTime)'
                 . 'values("' . $data["name"] . '","' . $data["phoneNumber"] . '","' . $data["city"] . '","' . $data["numberOfPeople"] . '","' . $data["comingDate"] . '","' . $data["returnDate"] . '","' . $data["amountPaid"] . '","' . $data["userId"] . '",now())';
         $result = queryRunner::doInsert($query);
-        if (!empty($result))
-            return TRUE;
+        if (!empty($result)){
+            echo $query = "SELECT id FROM guest where name='".$data["name"]."' ORDER BY id DESC LIMIT 1";
+            $result = queryRunner::doSelect($query);
+            return $result;
+        }
     }
 
     //allocate room  to the bhagats
@@ -79,6 +82,17 @@ class userDataHandler {
         if (empty($result)) {
             $query = "INSERT into user (name,username,password,role) values ('" . $data['name'] . "','" . $data['username'] . "','" . $data['password'] . "','" . $data['role'] . "')";
             $result = queryRunner::doInsert($query);
+            return $result;
+        }
+        return false;
+    }
+    
+    public function allotInventoryToUser($data){
+        $query = "INSERT INTO inventory (guestUserId,mattress,pillow,bedsheet,quilt,lockNkey,totalAmount,isReturned,createdBy,createdTime)"
+                . " values('".$data['userId']."','".$data['mattress']."','".$data['pillow']."','".$data['bedsheet']."','".$data['blanket']."','".$data['lock']."','".$data['totalAmount']."','0','".$data['createdBy']."',now())";
+        $result = queryRunner::doInsert($query);
+        if(!empty($result)){
+            $result= array($data['userId'],$data['totalAmount']);
             return $result;
         }
         return false;

@@ -75,7 +75,7 @@ if (!isset($_SESSION)) {
                 </li>
             <?php } else if (isset($_SESSION['role']) && $_SESSION['role'] == 'INVENTORY') { ?>
                 <li>
-                    <a href="#"><i class="fa fa-fw fa-plus"></i>Allot Inventory</a>
+                    <a href="inventoryById.php"><i class="fa fa-fw fa-plus"></i>Allot Inventory</a>
                 </li>
                 
             <?php } ?>
