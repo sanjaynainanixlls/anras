@@ -1,6 +1,6 @@
 <?php
     include 'includeSession.php';
-include dirname(dirname(__FILE__)) . '/sanjay/config/config.php';
+include dirname(dirname(__FILE__)) . '/anras/config/config.php';
 $postParams = Functions::getPostParams();
    if($postParams['action'] == 'completeStatus') {
             $id = $postParams['userId'];
