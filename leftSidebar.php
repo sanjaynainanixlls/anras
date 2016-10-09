@@ -47,7 +47,7 @@ if (!isset($_SESSION)) {
                     <a href="roomStatus.php"><i class="fa fa-fw fa-th-list"></i> Room Status</a>
                 </li>
                 <li>
-                    <a href="floorPlans.html"><i class="fa fa-fw fa-map-marker"></i> Floor Plans</a>
+                    <a href="floorPlans.php"><i class="fa fa-fw fa-map-marker"></i> Floor Plans</a>
                 </li>
                 <li>
                     <a href="todaysCheckouts.php"><i class="fa fa-fw fa-calendar"></i> Today's Checkouts</a>
