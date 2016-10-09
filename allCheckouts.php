@@ -54,9 +54,6 @@ $data = $userDataHandlerObj->allCheckOutData();
                                 Complete Status Of People
                             </h1>
                             <ol class="breadcrumb">
-                                <li>
-                                    <i class="fa fa-dashboard"></i>  <a href="index.html">Dashboard</a>
-                                </li>
                                 <li class="active">
                                     <i class="fa fa-table"></i> Complete Status Of People
                                 </li>

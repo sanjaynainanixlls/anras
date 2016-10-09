@@ -53,9 +53,6 @@ isset($result[0]) ? $data = $result[0] : '';
                                 Allot Inventory
                             </h1>
                             <ol class="breadcrumb">
-                                <li>
-                                    <i class="fa fa-dashboard"></i>  <a href="home.php">Dashboard</a>
-                                </li>
                                 <li class="active">
                                     <i class="fa fa-table"></i> Allot Inventory
                                 </li>

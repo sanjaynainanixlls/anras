@@ -50,9 +50,6 @@ session_start();
                             Checkout
                         </h1>
                         <ol class="breadcrumb">
-                            <li>
-                                <i class="fa fa-dashboard"></i>  <a href="home.php">Dashboard</a>
-                            </li>
                             <li class="active">
                                 <i class="fa fa-edit"></i> Checkout
                             </li>

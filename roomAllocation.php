@@ -59,9 +59,6 @@ $postParams = Functions::getPostParams();
                             Room Allotment
                         </h1>
                         <ol class="breadcrumb">
-                            <li>
-                                <i class="fa fa-dashboard"></i>  <a href="index.html">Dashboard</a>
-                            </li>
                             <li class="active">
                                 <i class="fa fa-edit"></i> Room Allotment
                             </li>

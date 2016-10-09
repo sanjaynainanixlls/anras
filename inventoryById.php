@@ -44,9 +44,6 @@ include 'includeSession.php';
                             Allot Inventory
                         </h1>
                         <ol class="breadcrumb">
-                            <li>
-                                <i class="fa fa-dashboard"></i>  <a href="home.php">Dashboard</a>
-                            </li>
                             <li class="active">
                                 <i class="fa fa-edit"></i>Allot Inventory
                             </li>
