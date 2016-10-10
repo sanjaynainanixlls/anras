@@ -5,11 +5,11 @@ if(!isset($_SESSION))
 
 include dirname(dirname(__FILE__)) . '/anras/config/config.php';
 $postParams = Functions::getPostParams();
-if ($postParams['action'] == 'allotInventory') {
+if ($postParams['action'] == 'returnInventory') {
     $id = $postParams['userId'];
     $userDataHandlerObj = new userDataHandler();
-    $result = $userDataHandlerObj->getCompleteStatusById($id);
-    $disabled = '';
+    $result = $userDataHandlerObj->getInventoryDetailsById($id);
+    //debug($result); exit;
 }
 
 isset($result[0]) ? $data = $result[0] : '';
@@ -65,39 +65,10 @@ isset($result[0]) ? $data = $result[0] : '';
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="table-responsive">
-                                <form method="" action="" id="formId">
-                                    <table class="table table-bordered table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th>Id</th>
-                                                <th>Name</th>
-                                                <th>Phone Number</th>
-                                                <th>City</th>
-                                                <th>Coming Date</th>
-                                                <th>Return Date</th>
-                                                <th>Number Of People</th>
-                                                <th>Room Number Alloted</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr id="checkoutDetail" name="checkoutDetail">
-                                                <td id="checkoutId" name="checkoutId"><?php if(isset($data['id']))  echo $data['id'];else echo '';?></td>
-                                                <td id="name" name="name"><?php if(isset($data['name']))echo $data['name'];else echo '';?> </td>
-                                                <td id="contact" name="contact"><?php if(isset($data['phoneNumber']))echo $data['phoneNumber'];else echo '';?></td>
-                                                <td id="city" name="city"><?php if(isset($data['city']))echo $data['city'];else echo '';?></td>
-                                                <td id="coming_date" name="coming_date"><?php if(isset($data['dateOfArrival']))echo $data['dateOfArrival'];else echo '';?></td>
-                                                <td id="return_date" name="return_date"><?php if(isset($data['dateOfDeparture']))echo $data['dateOfDeparture'];else echo '';?></td>
-                                                <td id="head_count" name="head_count"><?php if(isset($data['numberOfPeople']))echo $data['numberOfPeople'];else echo '';?></td>
-                                                <td id="room_alloted" name="room_alloted"><?php if(isset($data['roomNumberAllotted']))echo $data['roomNumberAllotted'];else echo '';?></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </form>
-                                <form method="POST" action="action/action.php" name="allotInventory">
-                                    <input type="hidden" name="action" value="allotInventory">
-                                    <input type="hidden" name="createdBy" value="<?php if(isset($_SESSION['userId'])) echo $_SESSION['userId']; else echo ''; ?>">
+                                <form method="POST" action="action/action.php" name="returnInventory">
+                                    <input type="hidden" name="action" value="returnInventory">
+                                    <input type="hidden" name="returnAmount" value="<?php if(isset($data['totalAmount'])) echo $data['totalAmount']; else echo ''; ?>">
                                     <input type="hidden" name="userId" value="<?php if(isset($data['id']))  echo $data['id'];?>">
-                                    <input type="hidden" id="totalAmount" name="totalAmount" value="">
                                 <table class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
@@ -113,40 +84,37 @@ isset($result[0]) ? $data = $result[0] : '';
                                     <tr>
                                         <td>
                                             <div class="form-group">
-                                                <input type="number" id="mattress" class="form-control" name="mattress" required="required" placeholder="mattress">
+                                                <input type="number"id="mattress" class="form-control" name="mattress" disabled value="<?php if(isset($result[0]['mattress'])) echo $result[0]['mattress']; else echo ''; ?>">
                                             </div>
 
                                         </td>
                                         <td>
                                             <div class="form-group">
-                                                <input type="number" id="pillow" class="form-control" name="pillow" required="required" placeholder="pillows">
+                                                <input type="number" id="pillow" class="form-control" name="pillow" disabled value="<?php if(isset($result[0]['pillow'])) echo $result[0]['pillow']; else echo ''; ?>">
                                             </div>
 
                                         </td>
                                         <td>
                                             <div class="form-group">
-                                                <input type="number" id="bedsheet" class="form-control" name="bedsheet" required="required" placeholder="bedsheets">
+                                                <input type="number" id="bedsheet" class="form-control" name="bedsheet" disabled value="<?php if(isset($result[0]['bedsheet'])) echo $result[0]['bedsheet']; else echo ''; ?>">
                                             </div>
 
                                         </td>
                                         <td>
                                             <div class="form-group">
-                                                <input type="number" id="blanket" class="form-control" name="blanket" required="required" placeholder="blankets">
+                                                <input type="number" id="blanket" class="form-control" name="blanket" disabled value="<?php if(isset($result[0]['quilt'])) echo $result[0]['quilt']; else echo ''; ?>">
                                             </div>
 
                                         </td>
                                         <td>
                                             <div class="form-group">
-                                                <input type="number" id="lock" class="form-control" name="lock" required="required" placeholder="lock">
+                                                <input type="number" id="lock" class="form-control" name="lock" disabled value="<?php if(isset($result[0]['lockNkey'])) echo $result[0]['lockNkey']; else echo ''; ?>">
                                             </div>
 
                                         </td>
                                         <td>
-                                            <?php if(!isset($data['id'])){
-                                                $disabled = 'disabled';
-                                            }?>
                                             <div class="form-group">
-                                                <input type="submit" <?php echo $disabled; ?> id="allotNow" name="allotNow" class="form-control btn btn-primary">
+                                                <input type="submit" id="releaseNow" name="releaseNow" class="form-control btn btn-primary">
                                             </div>
 
                                         </td>
@@ -161,7 +129,7 @@ isset($result[0]) ? $data = $result[0] : '';
                 <?php } else{ ?>
                     <div class="alert alert-error fade in">
                             <a href="#" class="close" data-dismiss="alert">&times;</a>
-                            <strong>No Record Found !!!</strong>
+                            <strong>No Inventory Alloted !!!</strong>
                         </div>
                 <?php }?>
                 </div>

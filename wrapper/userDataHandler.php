@@ -25,8 +25,10 @@ class userDataHandler {
         $query = "UPDATE guest SET roomNumberAllotted = '" . $data['roomNumberAlloted'] . "' WHERE id ='" . $data['name'] . "'";
         $result = queryRunner::doUpdate($query);
         self::entryRoom($data);
-        if (!empty($result))
-            return TRUE;
+        if (!empty($result)){
+            $returnedData = array($data['name'],$data['roomNumberAlloted']);
+            return $returnedData;
+        }
     }
 
     //get complete status form guest table
@@ -150,6 +152,22 @@ class userDataHandler {
         } else {
             return FALSE;
         }
+    }
+    
+    public function getinventoryDetailsById($id){
+        $query = "SELECT * FROM inventory where id='".$id."'";
+        $result = queryRunner::doSelect($query);
+        if(!empty($result))
+            return $result;
+        
+        return false;
+    }
+    
+    public function releaseInventory($data){
+        $query = "DELETE FROM inventory WHERE guestUserId='".$data['userId']."'";
+        $result = queryRunner::doDelete($query, '');
+        $returnArray = array($data['returnAmount'],$data['userId']);
+        return $returnArray;
     }
 
 }

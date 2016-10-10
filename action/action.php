@@ -51,8 +51,10 @@ class Action {
         } else if ($this->postParams['action'] == 'roomAllocation') {
             $userDataHandlerObj = new userDataHandler();
             $result = $userDataHandlerObj->allocateRoom($this->postParams);
-            if (TRUE) {
-                header("location: ../completeStatus.php");
+            if ($result) {
+                session_start();
+                $_SESSION['message'] = "Room Number: ".$result[1].' has been Alloted to User: '.$result[0];
+                header("location: ../home.php");
             }
         } else if ($this->postParams['action'] == 'checkOutUser') {
             $userDataHandlerObj = new userDataHandler();
@@ -93,6 +95,14 @@ class Action {
                 session_start();
                 $_SESSION['message'] = "Inventory Alloted to User: ".$result[0].', Please Collect '.$result[1].' INR';
                 header("location: ../inventoryById.php");
+                }
+        } else if($this->postParams['action'] == 'returnInventory') {
+                $userDataHandlerObj = new userDataHandler();
+                $result = $userDataHandlerObj->releaseInventory($this->postParams);
+            if (!empty($result)) {
+                session_start();
+                $_SESSION['message'] = "Return ".$result[0].' INR to UserId: '.$result[1];
+                header("location: ../returnInventoryById.php");
                 }
         }
     }
