@@ -155,7 +155,7 @@ class userDataHandler {
     }
     
     public function getinventoryDetailsById($id){
-        $query = "SELECT * FROM inventory where id='".$id."'";
+        $query = "SELECT * FROM inventory where guestUserId='".$id."'";
         $result = queryRunner::doSelect($query);
         if(!empty($result))
             return $result;

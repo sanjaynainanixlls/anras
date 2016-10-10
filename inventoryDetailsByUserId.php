@@ -9,7 +9,6 @@ if ($postParams['action'] == 'returnInventory') {
     $id = $postParams['userId'];
     $userDataHandlerObj = new userDataHandler();
     $result = $userDataHandlerObj->getInventoryDetailsById($id);
-    //debug($result); exit;
 }
 
 isset($result[0]) ? $data = $result[0] : '';
@@ -68,7 +67,7 @@ isset($result[0]) ? $data = $result[0] : '';
                                 <form method="POST" action="action/action.php" name="returnInventory">
                                     <input type="hidden" name="action" value="returnInventory">
                                     <input type="hidden" name="returnAmount" value="<?php if(isset($data['totalAmount'])) echo $data['totalAmount']; else echo ''; ?>">
-                                    <input type="hidden" name="userId" value="<?php if(isset($data['id']))  echo $data['id'];?>">
+                                    <input type="hidden" name="userId" value="<?php if(isset($data['guestUserId']))  echo $data['guestUserId'];?>">
                                 <table class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
