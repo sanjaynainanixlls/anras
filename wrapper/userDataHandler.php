@@ -14,7 +14,7 @@ class userDataHandler {
                 . 'values("' . $data["name"] . '","' . $data["phoneNumber"] . '","' . $data["city"] . '","' . $data["numberOfPeople"] . '","' . $data["comingDate"] . '","' . $data["returnDate"] . '","' . $data["amountPaid"] . '","' . $data["userId"] . '",now())';
         $result = queryRunner::doInsert($query);
         if (!empty($result)){
-            echo $query = "SELECT id FROM guest where name='".$data["name"]."' ORDER BY id DESC LIMIT 1";
+            $query = "SELECT id FROM guest where name='".$data["name"]."' ORDER BY id DESC LIMIT 1";
             $result = queryRunner::doSelect($query);
             return $result;
         }
