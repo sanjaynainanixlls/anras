@@ -10,36 +10,35 @@ class Action {
     public function execute() {
         $this->postParams = Functions::getPostParams();
 
-        if ($this->postParams['action'] == 'login') {   
-                $userDataHandlerObj = new userDataHandler();
-                $result = $userDataHandlerObj->authenticateUser($this->postParams['username'], $this->postParams['pwd']);
-                if (!empty($result)) {
-                    $_SESSION["user"] = $result[0]['username'];
-                    $_SESSION["role"] = $result[0]['role'];
-                    $_SESSION["userId"] = $result[0]['id'];
-                    if(isset($_SESSION['role']) && $_SESSION['role'] == 'ADMIN')
-                        header("location: ../home.php");
-                    else if(isset($_SESSION['role']) && $_SESSION['role'] == 'RECEPTION'){
-                        header("location: ../dataEntry.php");
-                    }
-                    else if(isset($_SESSION['role']) && $_SESSION['role'] == 'INVENTORY'){
-                        header("location: ../inventoryById.php");
-                    }
-                } else {
-                    $_SESSION['error'] = "Invalid Username or Password!";
-                    header("location: ../index.php");
-                }
-        } else if ($this->postParams['action'] == 'registerUser') {
-                $userDataHandlerObj = new userDataHandler();
-                $result = $userDataHandlerObj->registerUser($this->postParams);
-                if (!empty($result)) {
-                    session_start();
-                    $_SESSION['message'] = "User with ID: ".$result[0]['id']." Added Successfully!";
+        if ($this->postParams['action'] == 'login') {
+            $userDataHandlerObj = new userDataHandler();
+            $result = $userDataHandlerObj->authenticateUser($this->postParams['username'], $this->postParams['pwd']);
+            if (!empty($result)) {
+                $_SESSION["user"] = $result[0]['username'];
+                $_SESSION["role"] = $result[0]['role'];
+                $_SESSION["userId"] = $result[0]['id'];
+                if (isset($_SESSION['role']) && $_SESSION['role'] == 'ADMIN')
+                    header("location: ../home.php");
+                else if (isset($_SESSION['role']) && $_SESSION['role'] == 'RECEPTION') {
                     header("location: ../dataEntry.php");
-                } else {
-                    $_SESSION['error'] = "Invalid Username or Password!";
-                    header("location: ../index.php");
+                } else if (isset($_SESSION['role']) && $_SESSION['role'] == 'INVENTORY') {
+                    header("location: ../inventoryById.php");
                 }
+            } else {
+                $_SESSION['error'] = "Invalid Username or Password!";
+                header("location: ../index.php");
+            }
+        } else if ($this->postParams['action'] == 'registerUser') {
+            $userDataHandlerObj = new userDataHandler();
+            $result = $userDataHandlerObj->registerUser($this->postParams);
+            if (!empty($result)) {
+                session_start();
+                $_SESSION['message'] = "User with ID: " . $result[0]['id'] . " Added Successfully!";
+                header("location: ../dataEntry.php");
+            } else {
+                $_SESSION['error'] = "Invalid Username or Password!";
+                header("location: ../index.php");
+            }
         } else if ($this->postParams['action'] == 'registerUser') {
             $userDataHandlerObj = new userDataHandler();
             $result = $userDataHandlerObj->registerUser($this->postParams);
@@ -52,7 +51,11 @@ class Action {
             $userDataHandlerObj = new userDataHandler();
             $result = $userDataHandlerObj->allocateRoom($this->postParams);
             if (TRUE) {
-                header("location: ../completeStatus.php");
+                if ($_SESSION['role'] == 'ADMIN') {
+                    header("location: ../home.php");
+                } elseif ($_SESSION['role'] == 'RECEPTION') {
+                    header("location: ../completeStatus.php");
+                }
             }
         } else if ($this->postParams['action'] == 'checkOutUser') {
             $userDataHandlerObj = new userDataHandler();
@@ -87,13 +90,13 @@ class Action {
                 }
             }
         } else if ($this->postParams['action'] == 'allotInventory') {
-                $userDataHandlerObj = new userDataHandler();
-                $result = $userDataHandlerObj->allotInventoryToUser($this->postParams);
+            $userDataHandlerObj = new userDataHandler();
+            $result = $userDataHandlerObj->allotInventoryToUser($this->postParams);
             if (!empty($result)) {
                 session_start();
-                $_SESSION['message'] = "Inventory Alloted to User: ".$result[0].', Please Collect '.$result[1].' INR';
+                $_SESSION['message'] = "Inventory Alloted to User: " . $result[0] . ', Please Collect ' . $result[1] . ' INR';
                 header("location: ../inventoryById.php");
-                }
+            }
         }
     }
 
