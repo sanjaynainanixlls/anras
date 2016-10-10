@@ -15,7 +15,7 @@ include 'includeSession.php';
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>HOME :: SPRAS</title>
+        <title>HOME :: ANRAS</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -48,7 +48,7 @@ include 'includeSession.php';
                     <div class="row">
                         <div class="col-lg-12">
                             <h1 class="page-header">
-                                Shri Prayagdham 
+                                Shri Anandpur 
                             </h1>
 
                             <ol class="breadcrumb">

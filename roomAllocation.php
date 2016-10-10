@@ -106,13 +106,8 @@ $postParams = Functions::getPostParams();
                                                         
                             <div class="form-group">
                                 <label>Select Floor</label>
-                                <select class="form-control" id="ANFloorSelect">
+                                <select class="form-control" id="floorSelect">
                                     <option value="0">Ground Floor</option>
-                                    <option value="1">First Floor</option>
-                                    <option value="2">Second Floor</option>
-                                </select>
-                                
-                                <select class="form-control" id="ASFloorSelect" style="display:none">
                                     <option value="1">First Floor</option>
                                     <option value="2">Second Floor</option>
                                     <option value="3">Third Floor</option>
@@ -122,58 +117,72 @@ $postParams = Functions::getPostParams();
                             
                             <div class="form-group" id="groundFloorRooms">
                                 <label>Select Room</label>
-                                <select class="form-control" id="ANGroundFloorRoomsSelect">
-                                    <option value="1">G-1</option>
-                                    <option value="2">G-2</option>
-                                    <option value="4">G-4</option>
-                                    <option value="5">G-5</option>
-                                    <option value="6">G-6</option>
-                                    <option value="7">G-7</option>
-                                    <option value="8">G-8</option>
+                                <select class="form-control" id="groundFloorRoomsSelect">
+                                    <option value="100">Veranda Ground Floor D Block</option>
+                                    <option value="200">Veranda Ground Floor Main Block</option>
+                                    <option value="24">G-24</option>
+                                    <option value="25">G-25</option>
+                                    <option value="26">G-26</option>
+                                    <option value="27">G-27</option>
+                                    <option value="28">G-28</option>
+                                    <option value="29">G-29</option>
+                                    <option value="30">G-30</option>
+                                    <option value="31">G-31</option>
+                                    <option value="42">G-42</option>
+                                    <option value="43">G-43</option>
+                                    <option value="44">G-44</option>
+                                    <option value="45">G-45</option>
+                                    <option value="46">G-46</option>
+                                    <option value="47">G-47</option>
+                                    <option value="48">G-48</option>
                                 </select>
                             </div>
                             
                             <div class="form-group" id="firstFloorRooms">
                                 <label>Select Room</label>
-                                <select class="form-control" id="ANFirstFloorRoomsSelect">
-                                	<option>101</option>
-                                	<option>102</option>
-                                	<option>103</option>
-                                	<option>104</option>
-                                	<option>105</option>
-                                	<option>106</option>
-                                	<option>107</option>
-                                	<option>108</option>
+                                <select class="form-control" id="firstFloorRoomsSelect">
+                                	<option value="1001">Veranda First Floor A Block</option>
+                                	<option value="1002">Veranda First Floor D Block</option>
+                                	<option value="1003">Veranda First Floor Main Block</option>
+                                	
+                                    <option>101</option>
+                                    <option>102</option>
+                                    <option>103</option>
+                                    <option>104</option>
+                                    <option>105</option>
+                                    <option>106</option>
+                                    <option>107</option>
+                                    <option>108</option>
+                                    <option>109</option>
+                                    <option>110</option>
+                                    <option>111</option>
+                                    <option>113</option>
+                                    <option>114</option>
+                                    <option>115</option>
+                                    <option>116</option>
+                                    <option>117</option>
+                                    <option>118</option>
+                                    <option>119</option>
+                                    <option>120</option>
+                                    <option>121</option>
+                                    <option>122</option>
+                                    <option>137</option>
+                                    <option>138</option>
+                                    <option>139</option>
+                                    <option>140</option>
+                                    <option>141</option>
+                                    <option>142</option>
+                                    
                                 </select>
-                                
-                                <select class="form-control" id="ASFirstFloorRoomsSelect">
-                                	<option>511</option>
-                                	<option>512</option>
-                                	<option>513</option>
-                                	<option>514</option>
-                                	<option>515</option>
-                                	<option>516</option>
-                                	<option>517</option>
-                                	<option>518</option>
-                                	<option>519</option>
-                                	<option>611</option>
-                                	<option>612</option>
-                                	<option>613</option>
-                                	<option>614</option>
-                                	<option>615</option>
-                                	<option>616</option>
-                                	<option>617</option>
-                                	<option>618</option>
-                                	<option>619</option>
-                                	<option>620</option>
-                                </select>
-                                
-                                
                             </div>
                             
                             <div class="form-group" id="secondFloorRooms">
                                 <label>Select Room</label>
-                                <select class="form-control" id="ANSecondFloorRoomsSelect">
+                                <select class="form-control" id="secondFloorRoomsSelect">
+                                	<option value="2001">Veranda Second Floor A Block</option>
+                                	<option value="2002">Veranda Second Floor D Block</option>
+                                	<option value="2003">Veranda Second Floor Main Block</option>
+                                
                                     <option>201</option>
                                     <option>202</option>
                                     <option>203</option>
@@ -182,79 +191,79 @@ $postParams = Functions::getPostParams();
                                     <option>206</option>
                                     <option>207</option>
                                     <option>208</option>
+                                    <option>209</option>
+                                    <option>210</option>
+                                    <option>211</option>
+                                    <option>213</option>
+                                    <option>214</option>
+                                    <option>215</option>
+                                    <option>216</option>
+                                    <option>217</option>
+                                    <option>218</option>
+                                    <option>219</option>
+                                    <option>220</option>
+                                    <option>221</option>
+                                    <option>222</option>
+                                    <option>224</option>
+                                    <option>225</option>
+                                    <option>226</option>
+                                    <option>227</option>
+                                    <option>228</option>
+                                    <option>229</option>
+                                    <option>230</option>
+                                    <option>231</option>
+                                    <option>232</option>
+                                    <option>233</option>
+                                    <option>234</option>
+                                    <option>235</option>
+                                    <option>236</option>
+                                    <option>237</option>
+                                    <option>238</option>
+                                    <option>239</option>
+                                    <option>240</option>
+                                    <option>241</option>
                                 </select>
-                                
-                                <select class="form-control" id="ASSecondFloorRoomsSelect">
-                                    <option>521</option>
-                                    <option>522</option>
-                                    <option>523</option>
-                                    <option>524</option>
-                                    <option>525</option>
-                                    <option>526</option>
-                                    <option>527</option>
-                                    <option>528</option>
-                                    <option>529</option>
-                                    <option>621</option>
-                                    <option>622</option>
-                                    <option>623</option>
-                                    <option>624</option>
-                                    <option>625</option>
-                                    <option>626</option>
-                                    <option>627</option>
-                                    <option>628</option>
-                                    <option>629</option>
-                                    <option>630</option>
-                                </select>
-                                
                             </div>
                             
                             <div class="form-group" id="thirdFloorRooms">
                                 <label>Select Room</label>
-                                <select class="form-control" id="ASThirdFloorRoomsSelect">
-                                    <option>531</option>
-                                    <option>532</option>
-                                    <option>533</option>
-                                    <option>534</option>
-                                    <option>535</option>
-                                    <option>536</option>
-                                    <option>537</option>
-                                    <option>538</option>
-                                    <option>539</option>
-                                    <option>631</option>
-                                    <option>632</option>
-                                    <option>633</option>
-                                    <option>634</option>
-                                    <option>635</option>
-                                    <option>636</option>
-                                    <option>637</option>
-                                    <option>638</option>
-                                    <option>639</option>
-                                    <option>640</option>
+                                <select class="form-control" id="thirdFloorRoomsSelect">
+                                    <option value="3001">Veranda Third Floor Main Block</option>
+                                    
+                                    <option>301</option>
+                                    <option>302</option>
+                                    <option>303</option>
+                                    <option>304</option>
+                                    <option>305</option>
+                                    <option>306</option>
+                                    <option>307</option>
+                                    <option>308</option>
+                                    <option>309</option>
+                                    <option>310</option>
+                                    <option>311</option>
+                                    <option>313</option>
+                                    <option>314</option>
                                 </select>
                             </div>
                             
                             <div class="form-group"  id="fourthFloorRooms">
                                 <label>Select Room</label>
-                                <select class="form-control" id="ASFourthFloorRoomsSelect">
-                                    <option>541</option>
-                                    <option>542</option>
-                                    <option>543</option>
-                                    <option>544</option>
-                                    <option>545</option>
-                                    <option>546</option>
-                                    <option>547</option>
-                                    <option>548</option>
-                                    <option>549</option>
-                                    <option>641</option>
-                                    <option>642</option>
-                                    <option>643</option>
-                                    <option>644</option>
-                                    <option>645</option>
-                                    <option>646</option>
-                                    <option>647</option>
-                                    <option>648</option>
-                                    <option>649</option>
-                                    <option>650</option>
+                                <select class="form-control" id="fourthFloorRoomsSelect">
+                                    <option value="4001">Veranda Fourth Floor Main Block</option>
+                                    
+                                    <option>401</option>
+                                    <option>402</option>
+                                    <option>403</option>
+                                    <option>404</option>
+                                    <option>405</option>
+                                    <option>406</option>
+                                    <option>407</option>
+                                    <option>408</option>
+                                    <option>409</option>
+                                    <option>410</option>
+                                    <option>411</option>
+                                    <option>412</option>
+                                    <option>413</option>
                                     
                                 </select>
                             </div>
