@@ -60,7 +60,7 @@ class userDataHandler {
             }
         }
         if (!empty($result)){
-            $query = "SELECT id,roomNumberAllotted FROM guest WHERE roomNumberAllotted = '" . $data['roomNumberAlloted'] . "' AND isCheckout = '0'";
+            $query = "SELECT id,roomNumberAllotted FROM guest WHERE roomNumberAllotted = '" . $data['roomNumberAlloted'] . "' AND isCheckout = '0' AND name = '".$data['name']."' AND phoneNumber = '".$data['phoneNumber']."'";
             $result = queryRunner::doSelect($query);
             if(!empty($result)){
                 return $result;
