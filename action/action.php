@@ -98,6 +98,14 @@ class Action {
                 $_SESSION['message'] = "Return ".$result[0].' INR to UserId: '.$result[1];
                 header("location: ../returnInventoryById.php");
                 }
+        } else if($this->postParams['action'] == 'tallyCash') {
+                $userDataHandlerObj = new userDataHandler();
+                $result = $userDataHandlerObj->tallyCash($this->postParams);
+            if ($result) {
+                session_start();
+                $_SESSION['tallyCash'] = $result;
+                header("location: ../tallyCash.php");
+                }
         }
     }
 

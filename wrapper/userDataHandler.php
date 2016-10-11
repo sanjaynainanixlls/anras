@@ -202,6 +202,20 @@ class userDataHandler {
         $returnArray = array($data['returnAmount'], $data['userId']);
         return $returnArray;
     }
+    
+    public function tallyCash($data){
+        if($data['role'] == 'INVENTORY'){
+            $query1 = "SELECT SUM(totalAmount) as moneyDeposits FROM inventory WHERE isReturned='0' AND createdBy='".$data['userId']."'";
+            $query2 = "SELECT SUM(totalAmount) as moneyDeposits FROM inventory WHERE isReturned='1' AND createdBy='".$data['userId']."'";
+        }else if($data['role'] == 'RECEPTION'){
+            $query1 = "SELECT SUM(amountPaid) as moneyDeposits FROM guest WHERE isCheckOut='0' AND createdBy='".$data['userId']."'";
+            $query2 = "SELECT SUM(amountPaid) as moneyDeposits FROM guest WHERE isCheckOut='1' AND createdBy='".$data['userId']."'"; 
+        }
+        $result1 = queryRunner::doSelect($query1);
+        $result2 = queryRunner::doSelect($query2);
+        $result = (($result1[0]['moneyDeposits']) - ($result2[0]['moneyDeposits']));
+        return $result;
+    }
 
 }
 
