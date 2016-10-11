@@ -34,8 +34,9 @@ class userDataHandler {
         $city ='';
         if (isset($data['status'])) {
             $query = 'INSERT INTO guest (name,phoneNumber,city,numberOfPeople,dateOfArrival,dateOfDeparture,roomNumberAllotted,isCheckout,amountPaid,createdBy,createdTime)'
-                    . 'values("' . $data["name"] . '","' . $data["phoneNumber"] . '","' . $data["city"] . '","' . $data["numberOfPeople"] . '","' . $data["comingDate"] . '","' . $data["returnDate"] . '","' . $data['roomNumberAlloted'] . '",'0'"' . $data["amountPaid"] . '","' . $data["userId"] . '",now())';
+                    . 'values("' . $data["name"] . '","' . $data["phoneNumber"] . '","' . $data["city"] . '","' . $data["numberOfPeople"] . '","' . $data["comingDate"] . '","' . $data["returnDate"] . '","' . $data['roomNumberAlloted'] . '","0","' . $data["amountPaid"] . '","' . $data["userId"] . '",now())';
             $result = queryRunner::doInsert($query);
+            $sql1 = "SELECT city FROM guest WHERE roomNumberAllotted = '" . $data['roomNumberAlloted'] . "' AND isCheckout = '0'";
             $cityData = queryRunner::doSelect($sql1);
             if (isset($cityData)) {
                 for ($i = 0; $i < count($cityData); $i++) {
