@@ -1,6 +1,10 @@
 <?php
 session_start();
 include 'includeSession.php';
+include dirname(dirname(__FILE__)) . '/anras/config/config.php';
+$postParams = Functions::getPostParams();
+$userDataHandlerObj = new userDataHandler();
+$roomData = $userDataHandlerObj->allRoomStatus();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -117,7 +121,6 @@ include 'includeSession.php';
                                 <table id="roomStatusTable" class="table table-bordered table-hover">
                                     <thead>
                                         <tr>
-                                            <th style="width: 100px;">Bhawan</th>
                                             <th style="width: 100px;">Room Number</th>
                                             <th style="width: 100px;">Capacity</th>
                                             <th style="width: 100px;">Number Of People Staying</th>
@@ -126,13 +129,14 @@ include 'includeSession.php';
                                     </thead>
                                     <tbody>
 
-                                        <tr class="roomRows">
-                                            <td>Anand Niwas</td>
-                                            <td  class="roomNumberClass">100</td>
-                                            <td  class="roomCapacityClass">10</td>
-                                            <td  class="numberOfPeopleStayingClass">5</td>
-                                            <td class="cities">Jaipur,delhi</td>
-                                        </tr>
+                                        <?php for ($i = 0; $i < count($roomData); $i++) { ?>
+                                            <tr class="roomStatusTableRow">
+                                                <td class="roomNumberClass"><strong><?php echo $roomData[$i]['roomNumber']; ?></strong></td>
+                                                <td class="roomCapacityClass"><strong><?php echo $roomData[$i]['capacity']; ?></strong></td>
+                                                <td class="numberOfPeopleStayingClass"><strong><?php echo $roomData[$i]['occupied']; ?></strong></td>
+                                                <td class="cities"><strong><?php echo $roomData[$i]['city']; ?></strong></td>
+                                            </tr>
+                                        <?php } ?>
                                     </tbody>
                                 </table>
                             </div>
