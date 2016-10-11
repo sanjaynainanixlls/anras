@@ -72,25 +72,27 @@ $('#fourthFloorRoomsSelect').change(function(){
 	$('#roomNumberAlloted').val(roomValue);
 });
 
-$(document).ready(function(){
-	document.getElementById('comingDate').valueAsDate = new Date();
+$(document).ready(function () {
+    document.getElementById('comingDate').valueAsDate = new Date();
 
 });
 
-$('#printButton').bind('click', function(){
-	$(this).hide();
-	$('#closeButton').hide();
-	$('#wrapper').hide();
-	window.print();
-	$(this).show();
-	$('#closeButton').show();
-	$('#wrapper').show();
+$('#printButton').bind('click', function () {
+    $(this).hide();
+    $('#closeButton').hide();
+    $('#wrapper').hide();
+    window.print();
+    $(this).show();
+    $('#closeButton').show();
+    $('#wrapper').show();
 });
 
-$('#numberOfPeople').on('change', function(){
+$('#numberOfPeople').on('change', function () {
     var nop = $(this).val();
-    $('#totalAmountCard').val(nop*50);
-    
-    });
+    $('#totalAmountCard').val(nop * 50);
+});
 
-
+$(document).ready(function () {
+    var nop = $("#numberOfPeople").val();
+    $('#totalAmountCard').val(nop * 50);
+});

@@ -1,82 +1,89 @@
 <?php
-    include 'includeSession.php';
+include 'includeSession.php';
 include dirname(dirname(__FILE__)) . '/anras/config/config.php';
 $postParams = Functions::getPostParams();
-   if($postParams['action'] == 'completeStatus') {
-            $id = $postParams['userId'];
-            $userDataHandlerObj = new userDataHandler();
-            $result = $userDataHandlerObj->getCompleteStatusById($id);
-        }
-        
-        isset($result[0]) ?$data = $result[0]: '';
+$userDataHandlerObj = new userDataHandler();
+if ($postParams['action'] == 'completeStatus') {
+    $id = $postParams['userId'];
+    $result = $userDataHandlerObj->getCompleteStatusById($id);
+}
+$roomData = $userDataHandlerObj->allRoomStatus();
+isset($result[0]) ? $data = $result[0] : '';
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+    <head>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
 
-    <title>Room Allocation</title>
+        <title>Room Allocation</title>
 
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+        <!-- Bootstrap Core CSS -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom CSS -->
-    <link href="css/sb-admin.css" rel="stylesheet">
+        <!-- Custom CSS -->
+        <link href="css/sb-admin.css" rel="stylesheet">
 
-    <!-- Custom Fonts -->
-    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <!-- Custom Fonts -->
+        <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
 
-</head>
+    </head>
 
-<body>
+    <body>
 
-    <div id="wrapper">
+        <div id="wrapper">
 
-        <!-- Navigation -->
-         <?php include_once 'leftSidebar.php';?>
+            <!-- Navigation -->
+            <?php include_once 'leftSidebar.php'; ?>
 
-        <div id="page-wrapper">
+            <div id="page-wrapper">
 
-            <div class="container-fluid">
+                <div class="container-fluid">
 
-                <!-- Page Heading -->
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h1 class="page-header">
-                            Room Allotment
-                        </h1>
-                        <ol class="breadcrumb">
-                            <li class="active">
-                                <i class="fa fa-edit"></i> Room Allotment
-                            </li>
-                        </ol>
+                    <!-- Page Heading -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h1 class="page-header">
+                                Room Allotment
+                            </h1>
+                            <ol class="breadcrumb">
+                                <li class="active">
+                                    <i class="fa fa-edit"></i> Room Allotment
+                                </li>
+                            </ol>
+                        </div>
                     </div>
-                </div>
-                <!-- /.row -->
+                    <!-- /.row -->
 
-                <div class="row">
-                    <div class="col-lg-6">
+                    <div class="row">
+                        <div class="col-lg-6">
 
-                        <form role="form" action="action/action.php" method="post">
-                            <input type="hidden" name="action" value='roomAllocation'>
-                            <input type="hidden" name="id" value="<?php if(isset($data['id']))  echo $data['id'];else echo '';?>">
-                            <div class="form-group">
-                                <label>Name</label>
-                                <input type="text"  class="form-control" name="name" value="<?php if(isset($data['name']))echo $data['name'];else echo '';?>" required="required">
-                            </div>
+                            <form role="form" action="action/action.php" method="post">
+                                <input type="hidden" name="action" value='roomAllocation'>
+                                <?php if (!isset($data)) { ?>
+                                    <input type="hidden" name="status" value="newGuest">
+                                <?php } ?>
+                                <input type="hidden" name="id" value="<?php if (isset($data['id']))
+                                    echo $data['id'];
+                                else
+                                    echo '';
+                                ?>">
+                                <div class="form-group">
+                                    <label>Name</label>
+                                    <input type="text"  class="form-control" name="name" value="<?php if (isset($data['name'])) echo $data['name']; ?>" required="required">
+                                </div>
 
                             <div class="form-group">
                                 <label>City</label>
@@ -90,7 +97,7 @@ $postParams = Functions::getPostParams();
                             
                             <div class="form-group">
                                 <label>Total Number of Bhagats</label>
-                                <input type="number" class="form-control" name="numberOfPeople" value="<?php if(isset($data['numberOfPeople']))echo $data['numberOfPeople']; echo '';?>" required="required">
+                                <input type="number" class="form-control" id="numberOfPeople" name="numberOfPeople" value="<?php if(isset($data['numberOfPeople']))echo $data['numberOfPeople']; echo '';?>" required="required">
                             </div>
  							
                             <div class="form-group">
@@ -268,63 +275,66 @@ $postParams = Functions::getPostParams();
                                 </select>
                             </div>
                             <div class="form-group">
+                                <label>Please collect this Amount</label>
+                                <input id="totalAmountCard" type="number" class="form-control" name="amountPaid" value="<?php if(isset($data['amountPaid']))echo $data['amountPaid'];else echo '';?>" required="required">
+                            </div>
+                            <div class="form-group">
                             	<input name="roomNumberAlloted" id="roomNumberAlloted" type="number" value="" readonly="readonly"><span class="text-danger">Please check if this is the room number to be alloted</span>
                             </div>
 							
                             <button type="submit" class="btn btn-success">Submit</button>
                             <button type="reset" class="btn btn-warning">Reset</button>
+                            </form>
 
-                        </form>
+                        </div>
 
-                    </div>
-                    
-                    <div class="col-lg-6">
-						<div class="table-responsive">
-                            <table id="roomStatusTable" class="table table-bordered table-hover">
-                                <thead>
-                                    <tr>
-                                    	<th style="width: 100px;">Bhawan</th>
-                                        <th style="width: 100px;">Room Number</th>
-                                        <th style="width: 100px;">Capacity</th>
-                                        <th style="width: 100px;">Number Of People Staying</th>
-                                        <th>Cities</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                   
-             <tr class="roomRows">
-             <td>Anand Niwas</td>
-             <td  class="roomNumberClass">100</td>
-             <td  class="roomCapacityClass">10</td>
-             <td  class="numberOfPeopleStayingClass">5</td>
-             <td class="cities">Jaipur,delhi</td>
-             </tr>
-                                </tbody>
-                            </table>
+                        <div class="col-lg-6">
+                            <div class="table-responsive">
+                                <table id="roomStatusTable" class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 100px;">Room Number</th>
+                                            <th style="width: 100px;">Capacity</th>
+                                            <th style="width: 100px;">Number Of People Staying</th>
+                                            <th>Cities</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        <?php for ($i = 0; $i < count($roomData); $i++) { ?>
+                                            <tr class="roomStatusTableRow">
+                                                <td class="roomNumberClass"><strong><?php echo $roomData[$i]['roomNumber']; ?></strong></td>
+                                                <td class="roomCapacityClass"><strong><?php echo $roomData[$i]['capacity']; ?></strong></td>
+                                                <td class="numberOfPeopleStayingClass"><strong><?php echo $roomData[$i]['occupied']; ?></strong></td>
+                                                <td class="cities"><strong><?php echo $roomData[$i]['city']; ?></strong></td>
+                                            </tr>
+                                        <?php } ?>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
+                    <!-- /.row -->
+
                 </div>
-                <!-- /.row -->
+                <!-- /.container-fluid -->
 
             </div>
-            <!-- /.container-fluid -->
+            <!-- /#page-wrapper -->
 
         </div>
-        <!-- /#page-wrapper -->
+        <!-- /#wrapper -->
 
-    </div>
-    <!-- /#wrapper -->
-	
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
-	
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
-    
-    <!-- Additional JavaScript -->
-	<script src="js/script.js"></script>
-	<script src="js/roomStatus.js"></script>
+        <!-- jQuery -->
+        <script src="js/jquery.js"></script>
 
-</body>
+        <!-- Bootstrap Core JavaScript -->
+        <script src="js/bootstrap.min.js"></script>
+
+        <!-- Additional JavaScript -->
+        <script src="js/script.js"></script>
+        <script src="js/roomStatus.js"></script>
+
+    </body>
 
 </html>

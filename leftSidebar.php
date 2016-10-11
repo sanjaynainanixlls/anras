@@ -77,7 +77,12 @@ if (!isset($_SESSION)) {
                 <li>
                     <a href="inventoryById.php"><i class="fa fa-fw fa-plus"></i>Allot Inventory</a>
                 </li>
-                
+                <li>
+                    <a href="returnInventoryById.php"><i class="fa fa-fw fa-minus"></i>Inventory Return</a>
+                </li>
+                <li>
+                    <a href="completeStatus.php"><i class="fa fa-fw fa-list"></i> Complete Status</a>
+                </li>
             <?php } ?>
         </ul>
     </div>

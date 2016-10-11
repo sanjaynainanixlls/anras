@@ -13,8 +13,16 @@ class userDataHandler {
         $query = 'INSERT INTO guest (name,phoneNumber,city,numberOfPeople,dateOfArrival,dateOfDeparture,amountPaid,createdBy,createdTime)'
                 . 'values("' . $data["name"] . '","' . $data["phoneNumber"] . '","' . $data["city"] . '","' . $data["numberOfPeople"] . '","' . $data["comingDate"] . '","' . $data["returnDate"] . '","' . $data["amountPaid"] . '","' . $data["userId"] . '",now())';
         $result = queryRunner::doInsert($query);
-        if (!empty($result)){
-            $query = "SELECT id FROM guest where name='".$data["name"]."' ORDER BY id DESC LIMIT 1";
+        $sql1 = "SELECT city FROM guest WHERE roomNumberAllotted = '" . $data['roomNumberAllotted'] . "' AND isCheckout = '0'";
+        $cityData = queryRunner::doSelect($sql1);
+        for ($i = 0; $i < count($cityData); $i++) {
+            $city .= $cityData[$i]['city'] . ",";
+        }
+        $city = rtrim($city, ",");
+        $qry = "update rooms set occupied = occupied + " . $data['numberOfPeople'] . " , city = '" . $city . "' where roomNumber = '" . $data['roomNumberAllotted'] . "'";
+        $res = queryRunner::doUpdate($qry);
+        if (!empty($result)) {
+            $query = "SELECT id FROM guest where name='" . $data["name"] . "' ORDER BY id DESC LIMIT 1";
             $result = queryRunner::doSelect($query);
             return $result;
         }
@@ -22,16 +30,42 @@ class userDataHandler {
 
     //allocate room  to the bhagats
     public static function allocateRoom($data) {
-        $query = "UPDATE guest SET roomNumberAllotted = '" . $data['roomNumberAlloted'] . "' WHERE id ='" . $data['name'] . "'";
-        $result = queryRunner::doUpdate($query);
-        self::entryRoom($data);
+        $data['userId'] = $_SESSION['userId'];
+        $city ='';
+        if (isset($data['status'])) {
+            $query = 'INSERT INTO guest (name,phoneNumber,city,numberOfPeople,dateOfArrival,dateOfDeparture,roomNumberAllotted,isCheckout,amountPaid,createdBy,createdTime)'
+                    . 'values("' . $data["name"] . '","' . $data["phoneNumber"] . '","' . $data["city"] . '","' . $data["numberOfPeople"] . '","' . $data["comingDate"] . '","' . $data["returnDate"] . '","' . $data['roomNumberAlloted'] . '",'0'"' . $data["amountPaid"] . '","' . $data["userId"] . '",now())';
+            $result = queryRunner::doInsert($query);
+            $cityData = queryRunner::doSelect($sql1);
+            if (isset($cityData)) {
+                for ($i = 0; $i < count($cityData); $i++) {
+                    $city .= $cityData[$i]['city'] . ",";
+                }
+                $city = rtrim($city, ",");
+                $qry = "update rooms set occupied = occupied + " . $data['numberOfPeople'] . " , city = '" . $city . "' where roomNumber = '" . $data['roomNumberAlloted'] . "'";
+                $res = queryRunner::doUpdate($qry);
+            }
+        } else {
+            $query = "UPDATE guest SET roomNumberAllotted = '" . $data['roomNumberAlloted'] . "' WHERE id ='" . $data['id'] . "'";
+            $result = queryRunner::doUpdate($query);
+            $sql1 = "SELECT city FROM guest WHERE roomNumberAllotted = '" . $data['roomNumberAlloted'] . "' AND isCheckout = '0'";
+            $cityData = queryRunner::doSelect($sql1);
+            if (isset($cityData)) {
+                for ($i = 0; $i < count($cityData); $i++) {
+                    $city .= $cityData[$i]['city'] . ",";
+                }
+                $city = rtrim($city, ",");
+                $qry = "update rooms set occupied = occupied + " . $data['numberOfPeople'] . " , city = '" . $city . "' where roomNumber = '" . $data['roomNumberAlloted'] . "'";
+                $res = queryRunner::doUpdate($qry);
+            }
+        }
         if (!empty($result))
             return TRUE;
     }
 
     //get complete status form guest table
     public static function getCompleteStatus() {
-        $query = "SELECT * FROM guest";
+        $query = "SELECT * FROM guest where isCheckout='0'";
         $result = queryRunner::doSelect($query);
         return $result;
     }
@@ -86,13 +120,13 @@ class userDataHandler {
         }
         return false;
     }
-    
-    public function allotInventoryToUser($data){
+
+    public function allotInventoryToUser($data) {
         $query = "INSERT INTO inventory (guestUserId,mattress,pillow,bedsheet,quilt,lockNkey,totalAmount,isReturned,createdBy,createdTime)"
-                . " values('".$data['userId']."','".$data['mattress']."','".$data['pillow']."','".$data['bedsheet']."','".$data['blanket']."','".$data['lock']."','".$data['totalAmount']."','0','".$data['createdBy']."',now())";
+                . " values('" . $data['userId'] . "','" . $data['mattress'] . "','" . $data['pillow'] . "','" . $data['bedsheet'] . "','" . $data['blanket'] . "','" . $data['lock'] . "','" . $data['totalAmount'] . "','0','" . $data['createdBy'] . "',now())";
         $result = queryRunner::doInsert($query);
-        if(!empty($result)){
-            $result= array($data['userId'],$data['totalAmount']);
+        if (!empty($result)) {
+            $result = array($data['userId'], $data['totalAmount']);
             return $result;
         }
         return false;
@@ -150,6 +184,22 @@ class userDataHandler {
         } else {
             return FALSE;
         }
+    }
+
+    public function getinventoryDetailsById($id) {
+        $query = "SELECT * FROM inventory where guestUserId='" . $id . "' AND isReturned='0' ";
+        $result = queryRunner::doSelect($query);
+        if (!empty($result))
+            return $result;
+
+        return false;
+    }
+
+    public function releaseInventory($data) {
+        $query = "UPDATE inventory set isReturned='1' where guestUserId='".$data['userId']."'";
+        $result = queryRunner::doUpdate($query);
+        $returnArray = array($data['returnAmount'], $data['userId']);
+        return $returnArray;
     }
 
 }

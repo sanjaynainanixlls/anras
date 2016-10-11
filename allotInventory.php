@@ -9,6 +9,7 @@ if ($postParams['action'] == 'allotInventory') {
     $id = $postParams['userId'];
     $userDataHandlerObj = new userDataHandler();
     $result = $userDataHandlerObj->getCompleteStatusById($id);
+    $disabled = '';
 }
 
 isset($result[0]) ? $data = $result[0] : '';
@@ -60,7 +61,7 @@ isset($result[0]) ? $data = $result[0] : '';
                         </div>
                     </div>
                     <!-- /.row -->
-
+                <?php if(isset($data['id'])){?>
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="table-responsive">
@@ -141,8 +142,11 @@ isset($result[0]) ? $data = $result[0] : '';
 
                                         </td>
                                         <td>
+                                            <?php if(!isset($data['id'])){
+                                                $disabled = 'disabled';
+                                            }?>
                                             <div class="form-group">
-                                                <input type="submit" id="allotNow" name="allotNow" class="form-control btn btn-primary">
+                                                <input type="submit" <?php echo $disabled; ?> id="allotNow" name="allotNow" class="form-control btn btn-primary">
                                             </div>
 
                                         </td>
@@ -154,6 +158,12 @@ isset($result[0]) ? $data = $result[0] : '';
                         </div>
                     </div>
                     <!-- /.row -->
+                <?php } else{ ?>
+                    <div class="alert alert-error fade-in">
+                            <a href="#" class="close" data-dismiss="alert">&times;</a>
+                            <strong>No Record Found !!!</strong>
+                        </div>
+                <?php }?>
                 </div>
                 <!-- /.container-fluid -->
 
