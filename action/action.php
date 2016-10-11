@@ -50,13 +50,14 @@ class Action {
         } else if ($this->postParams['action'] == 'roomAllocation') {
             $userDataHandlerObj = new userDataHandler();
             $result = $userDataHandlerObj->allocateRoom($this->postParams);
-            if (TRUE) {
+            debug($result);exit();
+            if ($result) {
                 if ($_SESSION['role'] == 'ADMIN') {
+                    $_SESSION['message'] = "Room Number: ".$result[1].' has been Alloted to User: '.$result[0];
                     header("location: ../home.php");
                 } elseif ($_SESSION['role'] == 'RECEPTION') {
                     header("location: ../completeStatus.php");
                 }
-            }
         } else if ($this->postParams['action'] == 'checkOutUser') {
             $userDataHandlerObj = new userDataHandler();
             $result = $userDataHandlerObj->checkOutUser($this->postParams);
@@ -96,10 +97,20 @@ class Action {
                 session_start();
                 $_SESSION['message'] = "Inventory Alloted to User: " . $result[0] . ', Please Collect ' . $result[1] . ' INR';
                 header("location: ../inventoryById.php");
-            }
+
+                }
+        } else if($this->postParams['action'] == 'returnInventory') {
+                $userDataHandlerObj = new userDataHandler();
+                $result = $userDataHandlerObj->releaseInventory($this->postParams);
+            if (!empty($result)) {
+                session_start();
+                $_SESSION['message'] = "Return ".$result[0].' INR to UserId: '.$result[1];
+                header("location: ../returnInventoryById.php");
+                }
         }
     }
 
+}
 }
 
 $ActionObj = new Action();

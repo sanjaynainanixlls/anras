@@ -31,29 +31,35 @@ class userDataHandler {
     //allocate room  to the bhagats
     public static function allocateRoom($data) {
         $data['userId'] = $_SESSION['userId'];
+        $city ='';
         if (isset($data['status'])) {
             $query = 'INSERT INTO guest (name,phoneNumber,city,numberOfPeople,dateOfArrival,dateOfDeparture,roomNumberAllotted,amountPaid,createdBy,createdTime)'
                     . 'values("' . $data["name"] . '","' . $data["phoneNumber"] . '","' . $data["city"] . '","' . $data["numberOfPeople"] . '","' . $data["comingDate"] . '","' . $data["returnDate"] . '","' . $data['roomNumberAlloted'] . '","' . $data["amountPaid"] . '","' . $data["userId"] . '",now())';
             $result = queryRunner::doInsert($query);
-            $sql1 = "SELECT city FROM guest WHERE roomNumberAllotted = '" . $data['roomNumberAlloted'] . "' AND isCheckout = '0'";
+            echo $sql1 = "SELECT city FROM guest WHERE roomNumberAllotted = '" . $data['roomNumberAlloted'] . "' AND isCheckout = '0'";
             $cityData = queryRunner::doSelect($sql1);
-            for ($i = 0; $i < count($cityData); $i++) {
-                $city .= $cityData[$i]['city'] . ",";
+            debug($cityData);
+            if (isset($cityData)) {
+                for ($i = 0; $i < count($cityData); $i++) {
+                    $city .= $cityData[$i]['city'] . ",";
+                }
+                $city = rtrim($city, ",");
+                $qry = "update rooms set occupied = occupied + " . $data['numberOfPeople'] . " , city = '" . $city . "' where roomNumber = '" . $data['roomNumberAlloted'] . "'";
+                $res = queryRunner::doUpdate($qry);
             }
-            $city = rtrim($city, ",");
-            $qry = "update rooms set occupied = occupied + " . $data['numberOfPeople'] . " , city = '" . $city . "' where roomNumber = '" . $data['roomNumberAlloted'] . "'";
-            $res = queryRunner::doUpdate($qry);
         } else {
             $query = "UPDATE guest SET roomNumberAllotted = '" . $data['roomNumberAlloted'] . "' WHERE id ='" . $data['id'] . "'";
             $result = queryRunner::doUpdate($query);
             $sql1 = "SELECT city FROM guest WHERE roomNumberAllotted = '" . $data['roomNumberAlloted'] . "' AND isCheckout = '0'";
             $cityData = queryRunner::doSelect($sql1);
-            for ($i = 0; $i < count($cityData); $i++) {
-                $city .= $cityData[$i]['city'] . ",";
+            if (isset($cityData)) {
+                for ($i = 0; $i < count($cityData); $i++) {
+                    $city .= $cityData[$i]['city'] . ",";
+                }
+                $city = rtrim($city, ",");
+                $qry = "update rooms set occupied = occupied + " . $data['numberOfPeople'] . " , city = '" . $city . "' where roomNumber = '" . $data['roomNumberAlloted'] . "'";
+                $res = queryRunner::doUpdate($qry);
             }
-            $city = rtrim($city, ",");
-            $qry = "update rooms set occupied = occupied + " . $data['numberOfPeople'] . " , city = '" . $city . "' where roomNumber = '" . $data['roomNumberAlloted'] . "'";
-            $res = queryRunner::doUpdate($qry);
         }
         if (!empty($result))
             return TRUE;
@@ -180,6 +186,22 @@ class userDataHandler {
         } else {
             return FALSE;
         }
+    }
+
+    public function getinventoryDetailsById($id) {
+        $query = "SELECT * FROM inventory where guestUserId='" . $id . "'";
+        $result = queryRunner::doSelect($query);
+        if (!empty($result))
+            return $result;
+
+        return false;
+    }
+
+    public function releaseInventory($data) {
+        $query = "DELETE FROM inventory WHERE guestUserId='" . $data['userId'] . "'";
+        $result = queryRunner::doDelete($query, '');
+        $returnArray = array($data['returnAmount'], $data['userId']);
+        return $returnArray;
     }
 
 }
