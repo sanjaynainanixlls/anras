@@ -1,6 +1,6 @@
 <?php
-
-session_start();
+if(!isset($_SESSION))
+    session_start();
 include dirname(dirname(__FILE__)) . '/config/config.php';
 
 class Action {
@@ -9,7 +9,6 @@ class Action {
 
     public function execute() {
         $this->postParams = Functions::getPostParams();
-
         if ($this->postParams['action'] == 'login') {
             $userDataHandlerObj = new userDataHandler();
             $result = $userDataHandlerObj->authenticateUser($this->postParams['username'], $this->postParams['pwd']);
@@ -39,18 +38,9 @@ class Action {
                 $_SESSION['error'] = "Invalid Username or Password!";
                 header("location: ../index.php");
             }
-        } else if ($this->postParams['action'] == 'registerUser') {
-            $userDataHandlerObj = new userDataHandler();
-            $result = $userDataHandlerObj->registerUser($this->postParams);
-            if (!empty($result)) {
-                session_start();
-                $_SESSION['message'] = "New User Added Successfully";
-                header("location: ../dataEntry.php");
-            }
-        } else if ($this->postParams['action'] == 'roomAllocation') {
+        }  else if ($this->postParams['action'] == 'roomAllocation') {
             $userDataHandlerObj = new userDataHandler();
             $result = $userDataHandlerObj->allocateRoom($this->postParams);
-            debug($result);exit();
             if ($result) {
                 if ($_SESSION['role'] == 'ADMIN') {
                     $_SESSION['message'] = "Room Number: ".$result[1].' has been Alloted to User: '.$result[0];
@@ -58,6 +48,7 @@ class Action {
                 } elseif ($_SESSION['role'] == 'RECEPTION') {
                     header("location: ../completeStatus.php");
                 }
+            }
         } else if ($this->postParams['action'] == 'checkOutUser') {
             $userDataHandlerObj = new userDataHandler();
             $result = $userDataHandlerObj->checkOutUser($this->postParams);
@@ -110,7 +101,6 @@ class Action {
         }
     }
 
-}
 }
 
 $ActionObj = new Action();

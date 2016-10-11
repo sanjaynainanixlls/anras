@@ -198,8 +198,8 @@ class userDataHandler {
     }
 
     public function releaseInventory($data) {
-        $query = "DELETE FROM inventory WHERE guestUserId='" . $data['userId'] . "'";
-        $result = queryRunner::doDelete($query, '');
+        $query = "UPDATE inventory set isReturned='1' where guestUserId='".$data['userId']."'";
+        $result = queryRunner::doUpdate($query);
         $returnArray = array($data['returnAmount'], $data['userId']);
         return $returnArray;
     }
