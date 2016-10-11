@@ -76,6 +76,9 @@ if (!isset($_SESSION)) {
                 <li>
                     <a href="roomStatus.php"><i class="fa fa-fw fa-th-list"></i> Room Status</a>
                 </li>
+                <li>
+                    <a href="tallyCash.php"><i class="fa fa-fw fa-list"></i>Tally Cash</a>
+                </li>
             <?php } else if (isset($_SESSION['role']) && $_SESSION['role'] == 'INVENTORY') { ?>
                 <li>
                     <a href="inventoryById.php"><i class="fa fa-fw fa-plus"></i>Allot Inventory</a>
@@ -85,6 +88,9 @@ if (!isset($_SESSION)) {
                 </li>
                 <li>
                     <a href="completeStatus.php"><i class="fa fa-fw fa-list"></i> Complete Status</a>
+                </li>
+                <li>
+                    <a href="tallyCash.php"><i class="fa fa-fw fa-list"></i>Tally Cash</a>
                 </li>
             <?php } ?>
         </ul>
