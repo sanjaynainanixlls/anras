@@ -13,15 +13,8 @@ class userDataHandler {
         $query = 'INSERT INTO guest (name,phoneNumber,city,numberOfPeople,dateOfArrival,dateOfDeparture,amountPaid,createdBy,createdTime)'
                 . 'values("' . $data["name"] . '","' . $data["phoneNumber"] . '","' . $data["city"] . '","' . $data["numberOfPeople"] . '","' . $data["comingDate"] . '","' . $data["returnDate"] . '","' . $data["amountPaid"] . '"," ' . $data["userId"] . '",now())';
         $result = queryRunner::doInsert($query);
-        $sql1 = "SELECT city FROM guest WHERE roomNumberAllotted = '" . $data['roomNumberAllotted'] . "' AND isCheckout = '0'";
-        $cityData = queryRunner::doSelect($sql1);
-        for ($i = 0; $i < count($cityData); $i++) {
-            $city .= $cityData[$i]['city'] . ",";
-        }
-        $city = rtrim($city, ",");
-        $qry = "update rooms set occupied = occupied + " . $data['numberOfPeople'] . " , city = '" . $city . "' where roomNumber = '" . $data['roomNumberAllotted'] . "'";
-        $res = queryRunner::doUpdate($qry);
-        if (!empty($result)) {
+        
+        if ($result) {
             $query = "SELECT id FROM guest where name='" . $data["name"] . "'WHERE createdBy='". $data["userId"] ."' ORDER BY id DESC LIMIT 1";
             $result = queryRunner::doSelect($query);
             return $result;

@@ -51,8 +51,8 @@ $('#searchByRoom').on('keyup', function(){
 $('#searchByCity').on('keyup', function(){
 	var searchText = $(this).val();
 	$('.roomStatusTableRow').each(function(index){
-		var idCellText = $(this).find('.cities').text();
-		if(idCellText.indexOf(searchText.toUpperCase())>-1){
+		var idCellText = $(this).find('.cities').text().toLowerCase();
+		if(idCellText.indexOf(searchText.toUpperCase())>-1 || idCellText.indexOf(searchText.toLowerCase())>-1){
 			$(this).show();
 		}
 		else{

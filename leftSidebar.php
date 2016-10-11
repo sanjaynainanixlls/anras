@@ -68,6 +68,9 @@ if (!isset($_SESSION)) {
                     <a href="dataEntry.php"><i class="fa fa-fw fa-plus"></i> Allot A New Room</a>
                 </li>
                 <li>
+                    <a href="checkout.php"><i class="fa fa-fw fa-minus"></i> Checkout A Room</a>
+                </li>
+                <li>
                     <a href="completeStatus.php"><i class="fa fa-fw fa-list"></i> Complete Status</a>
                 </li>
                 <li>
