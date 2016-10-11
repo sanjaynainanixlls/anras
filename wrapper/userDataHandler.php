@@ -65,7 +65,7 @@ class userDataHandler {
     }
 
     //get complete status form guest table
-    public static function getCompleteStatus() {
+    public  function getCompleteStatus() {
         $query = "SELECT * FROM guest where isCheckout='0'";
         $result = queryRunner::doSelect($query);
         return $result;
