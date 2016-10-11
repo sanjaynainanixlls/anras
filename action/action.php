@@ -41,11 +41,13 @@ class Action {
         }  else if ($this->postParams['action'] == 'roomAllocation') {
             $userDataHandlerObj = new userDataHandler();
             $result = $userDataHandlerObj->allocateRoom($this->postParams);
-            if ($result) {
+            if (!empty($result)) {
                 if ($_SESSION['role'] == 'ADMIN') {
-                    $_SESSION['message'] = "Room Number: ".$this->postParams['roomNumberAlloted'].' has been Alloted to Bhagat '.$this->postParams['name'];
+                    
+                    $_SESSION['message'] = "Room Number: ".$result[0]['roomNumberAllotted'].' has been Alloted to Bhagat id :'.$result[0]['id'];
                     header("location: ../home.php");
                 } elseif ($_SESSION['role'] == 'RECEPTION') {
+                    $_SESSION['message'] = "Room Number: ".$result[0]['roomNumberAllotted'].' has been Alloted to Bhagat id :'.$result[0]['id'];
                     header("location: ../completeStatus.php");
                 }
             }

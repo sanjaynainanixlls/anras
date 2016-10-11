@@ -3,8 +3,8 @@ if(!isset($_SESSION))
     session_start();
 include 'includeSession.php';
 include dirname(dirname(__FILE__)) . '/anras/action/completeStatusAction.php';
-$completeStausObj = new CompleteStatus();
-$data = $completeStausObj->getComStatus();
+$userDataHandlerObj = new userDataHandler();
+$data = $userDataHandlerObj->getCompleteStatus();
 ?>
 <!DOCTYPE html>
 <html lang="en">

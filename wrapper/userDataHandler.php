@@ -11,7 +11,7 @@ class userDataHandler {
     public static function registerUser($data) {
         $data['userId'] = $_SESSION['userId'];
         $query = 'INSERT INTO guest (name,phoneNumber,city,numberOfPeople,dateOfArrival,dateOfDeparture,amountPaid,createdBy,createdTime)'
-                . 'values("' . $data["name"] . '","' . $data["phoneNumber"] . '","' . $data["city"] . '","' . $data["numberOfPeople"] . '","' . $data["comingDate"] . '","' . $data["returnDate"] . '","' . $data["amountPaid"] . '","' . $data["userId"] . '",now())';
+                . 'values("' . $data["name"] . '","' . $data["phoneNumber"] . '","' . $data["city"] . '","' . $data["numberOfPeople"] . '","' . $data["comingDate"] . '","' . $data["returnDate"] . '","' . $data["amountPaid"] . '"," ' . $data["userId"] . '",now())';
         $result = queryRunner::doInsert($query);
         $sql1 = "SELECT city FROM guest WHERE roomNumberAllotted = '" . $data['roomNumberAllotted'] . "' AND isCheckout = '0'";
         $cityData = queryRunner::doSelect($sql1);
@@ -22,7 +22,7 @@ class userDataHandler {
         $qry = "update rooms set occupied = occupied + " . $data['numberOfPeople'] . " , city = '" . $city . "' where roomNumber = '" . $data['roomNumberAllotted'] . "'";
         $res = queryRunner::doUpdate($qry);
         if (!empty($result)) {
-            $query = "SELECT id FROM guest where name='" . $data["name"] . "' ORDER BY id DESC LIMIT 1";
+            $query = "SELECT id FROM guest where name='" . $data["name"] . "'WHERE createdBy='". $data["userId"] ."' ORDER BY id DESC LIMIT 1";
             $result = queryRunner::doSelect($query);
             return $result;
         }
@@ -33,10 +33,9 @@ class userDataHandler {
         $data['userId'] = $_SESSION['userId'];
         $city ='';
         if (isset($data['status'])) {
-            $query = 'INSERT INTO guest (name,phoneNumber,city,numberOfPeople,dateOfArrival,dateOfDeparture,roomNumberAllotted,isCheckout,amountPaid,createdBy,createdTime)'
-                    . 'values("' . $data["name"] . '","' . $data["phoneNumber"] . '","' . $data["city"] . '","' . $data["numberOfPeople"] . '","' . $data["comingDate"] . '","' . $data["returnDate"] . '","' . $data['roomNumberAlloted'] . '","0","' . $data["amountPaid"] . '","' . $data["userId"] . '",now())';
+            $query = 'INSERT INTO guest (name,phoneNumber,city,numberOfPeople,dateOfArrival,dateOfDeparture,roomNumberAllotted,isCheckout,amountPaid,createdBy,createdTime)'. 'values("' . $data["name"] . '","' . $data["phoneNumber"] . '","' . $data["city"] . '","' . $data["numberOfPeople"] . '","' . $data["comingDate"] . '","' . $data["returnDate"] . '","' . $data['roomNumberAlloted'] . '","0","' . $data["amountPaid"] . '","' . $data["userId"] . '",now())';
             $result = queryRunner::doInsert($query);
-            $sql1 = "SELECT city FROM guest WHERE roomNumberAllotted = '" . $data['roomNumberAlloted'] . "' AND isCheckout = '0'";
+            $sql1 = "SELECT DISTINCT city FROM guest WHERE roomNumberAllotted = '" . $data['roomNumberAlloted'] . "' AND isCheckout = '0'";
             $cityData = queryRunner::doSelect($sql1);
             if (isset($cityData)) {
                 for ($i = 0; $i < count($cityData); $i++) {
@@ -49,7 +48,7 @@ class userDataHandler {
         } else {
             $query = "UPDATE guest SET roomNumberAllotted = '" . $data['roomNumberAlloted'] . "' WHERE id ='" . $data['id'] . "'";
             $result = queryRunner::doUpdate($query);
-            $sql1 = "SELECT city FROM guest WHERE roomNumberAllotted = '" . $data['roomNumberAlloted'] . "' AND isCheckout = '0'";
+            $sql1 = "SELECT DISTINCT city FROM guest WHERE roomNumberAllotted = '" . $data['roomNumberAlloted'] . "' AND isCheckout = '0'";
             $cityData = queryRunner::doSelect($sql1);
             if (isset($cityData)) {
                 for ($i = 0; $i < count($cityData); $i++) {
@@ -60,12 +59,17 @@ class userDataHandler {
                 $res = queryRunner::doUpdate($qry);
             }
         }
-        if (!empty($result))
-            return TRUE;
+        if (!empty($result)){
+            $query = "SELECT id,roomNumberAllotted FROM guest WHERE roomNumberAllotted = '" . $data['roomNumberAlloted'] . "' AND isCheckout = '0' AND name = '".$data['name']."' AND phoneNumber = '".$data['phoneNumber']."'";
+            $result = queryRunner::doSelect($query);
+            if(!empty($result)){
+                return $result;
+            }
+        }
     }
 
     //get complete status form guest table
-    public static function getCompleteStatus() {
+    public  function getCompleteStatus() {
         $query = "SELECT * FROM guest where isCheckout='0'";
         $result = queryRunner::doSelect($query);
         return $result;
@@ -98,7 +102,7 @@ class userDataHandler {
             $query1 = "UPDATE guest SET isCheckout = '1' WHERE id = '" . $data['userId'] . "'";
             $userData = queryRunner::doUpdate($query1);
             if ($userData['status'] == 1) {
-                $sql1 = "SELECT city FROM guest WHERE roomNumberAllotted = '" . $data['roomNumberAllotted'] . "' AND isCheckout = '0'";
+                $sql1 = "SELECT DISTINCT city FROM guest WHERE roomNumberAllotted = '" . $data['roomNumberAllotted'] . "' AND isCheckout = '0'";
                 $cityData = queryRunner::doSelect($sql1);
                 for ($i = 0; $i < count($cityData); $i++) {
                     $city .= $cityData[$i]['city'] . ",";
@@ -161,7 +165,7 @@ class userDataHandler {
             $userData = queryRunner::doUpdate($query1);
             if ($userData['status'] == 1) {
                 for ($i = 0; $i < count($data['roomNumberAllotted']); $i++) {
-                    $sql1 = "SELECT city FROM guest WHERE roomNumberAllotted = '" . $data['roomNumberAllotted'][$i] . "' AND isCheckout = '0'";
+                    $sql1 = "SELECT DISTINCT city FROM guest WHERE roomNumberAllotted = '" . $data['roomNumberAllotted'][$i] . "' AND isCheckout = '0'";
                     $cityData = queryRunner::doSelect($sql1);
                     $city = '';
                     for ($j = 0; $j < count($cityData); $j++) {
