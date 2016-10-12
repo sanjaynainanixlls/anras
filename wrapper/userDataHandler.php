@@ -10,12 +10,12 @@ class userDataHandler {
 
     public static function registerUser($data) {
         $data['userId'] = $_SESSION['userId'];
-        $query = 'INSERT INTO guest (name,phoneNumber,city,numberOfPeople,dateOfArrival,dateOfDeparture,amountPaid,createdBy,createdTime)'
-                . 'values("' . $data["name"] . '","' . $data["phoneNumber"] . '","' . $data["city"] . '","' . $data["numberOfPeople"] . '","' . $data["comingDate"] . '","' . $data["returnDate"] . '","' . $data["amountPaid"] . '"," ' . $data["userId"] . '",now())';
+        $query = 'INSERT INTO guest (name,phoneNumber,city,numberOfPeople,dateOfArrival,dateOfDeparture,amountPaid,isCheckout,createdBy,createdTime)'
+                . 'values("' . $data["name"] . '","' . $data["phoneNumber"] . '","' . $data["city"] . '","' . $data["numberOfPeople"] . '","' . $data["comingDate"] . '","' . $data["returnDate"] . '","' . $data["amountPaid"] . '","0"," ' . $data["userId"] . '",now())';
         $result = queryRunner::doInsert($query);
-        
-        if ($result) {
-            $query = "SELECT id FROM guest where name='" . $data["name"] . "'WHERE createdBy='". $data["userId"] ."' ORDER BY id DESC LIMIT 1";
+
+        if ($result['status'] == 1) {
+            $query = "SELECT id FROM guest where name='" . $data["name"] . "'AND createdBy='". $data["userId"] ."' AND isCheckout = '0'  AND phoneNumber = '".$data['phoneNumber']."'";
             $result = queryRunner::doSelect($query);
             return $result;
         }
@@ -175,6 +175,16 @@ class userDataHandler {
     }
 
     public function allCheckOutData() {
+        $query = "SELECT * FROM guest WHERE isCheckout = '1'";
+        $result = queryRunner::doSelect($query);
+        if (!empty($result)) {
+            return $result;
+        } else {
+            return FALSE;
+        }
+    }
+    
+    public function notCheckedOutData() {
         $query = "SELECT * FROM guest WHERE isCheckout = '0'";
         $result = queryRunner::doSelect($query);
         if (!empty($result)) {

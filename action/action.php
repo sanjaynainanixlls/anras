@@ -43,12 +43,8 @@ class Action {
             $result = $userDataHandlerObj->allocateRoom($this->postParams);
             if (!empty($result)) {
                 if ($_SESSION['role'] == 'ADMIN') {
-                    
                     $_SESSION['message'] = "Room Number: ".$result[0]['roomNumberAllotted'].' has been Alloted to Bhagat id :'.$result[0]['id'];
                     header("location: ../home.php");
-                } elseif ($_SESSION['role'] == 'RECEPTION') {
-                    $_SESSION['message'] = "Room Number: ".$result[0]['roomNumberAllotted'].' has been Alloted to Bhagat id :'.$result[0]['id'];
-                    header("location: ../completeStatus.php");
                 }
             }
         } else if ($this->postParams['action'] == 'checkOutUser') {
