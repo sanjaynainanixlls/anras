@@ -54,7 +54,7 @@ include 'includeSession.php';
                 <?php if (isset($_SESSION['message']) && $_SESSION['message'] != '') { ?>
                         <div class="alert alert-success fade in">
                             <a href="#" class="close" data-dismiss="alert">&times;</a>
-                            <strong><?php echo $_SESSION['message']; ?></strong>
+                            <strong style="font-size:16px"><?php echo $_SESSION['message']; ?></strong>
                         </div>
                     <?php } unset($_SESSION['message']);?>
                 <div class="row">
