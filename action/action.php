@@ -99,7 +99,7 @@ class Action {
         } else if($this->postParams['action'] == 'tallyCash') {
                 $userDataHandlerObj = new userDataHandler();
                 $result = $userDataHandlerObj->tallyCash($this->postParams);
-            if ($result) {
+            if (isset($result)) {
                 session_start();
                 $_SESSION['tallyCash'] = $result;
                 header("location: ../tallyCash.php");

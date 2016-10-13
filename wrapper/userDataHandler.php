@@ -203,7 +203,8 @@ class userDataHandler {
         if($data['role'] == 'INVENTORY'){
             $query1 = "SELECT SUM(totalAmount) as moneyDeposits FROM inventory WHERE isReturned='0' AND createdBy='".$data['userId']."'";
             $query2 = "SELECT SUM(totalAmount) as moneyDeposits FROM inventory WHERE isReturned='1' AND createdBy='".$data['userId']."'";
-        }else if($data['role'] == 'RECEPTION'){
+        }
+        if($data['role'] == 'RECEPTION'){
             $query1 = "SELECT SUM(amountPaid) as moneyDeposits FROM guest WHERE isCheckOut='0' AND createdBy='".$data['userId']."'";
             $query2 = "SELECT SUM(amountPaid) as moneyDeposits FROM guest WHERE isCheckOut='1' AND createdBy='".$data['userId']."'"; 
         }

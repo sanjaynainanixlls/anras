@@ -52,9 +52,17 @@ include 'includeSession.php';
                         <input type="hidden" name="action" value="tallyCash">
                         <input type="hidden" name="role" value="<?php echo(isset($_SESSION['role'])?$_SESSION['role']:'');?>">
                         <input type="hidden" name="userId" value="<?php if (isset($_SESSION['userId'])) echo $_SESSION['userId']; else echo ''; ?>">
-                        
-                        <span><?php echo (isset($_SESSION['tallyCash'])? 'Total Cash Remaining Should Be: '.$_SESSION['tallyCash'].' INR':' No Transactions Made Yet ...'); session_unset();?></span>
-                        
+                        <?php 
+                        $disabled = '' ;
+                        $msg = '';
+                        if(isset($_SESSION['tallyCash'])){
+                            $disabled = 'disabled';
+                            $msg =  'Total Cash Remaining Should Be: '.$_SESSION['tallyCash'].' INR'; 
+                            session_unset();
+                        } ?>
+                        <span <?php echo $disabled; ?>> <?php echo $msg; ?></span>
+                        <button type="submit" class="btn btn-success" value="submit" <?php echo $disabled; ?> >Check</button>
+                    </form>
                             
                 </div>
             </div>

@@ -22,7 +22,7 @@ class connection{
                 //$db = config::getDatabase();
                 //$user = config::getUser();
                 //$pass = config::getPassword();
-                $host = "localhost";
+                $host = "127.0.0.1";
                 $db = 'anra';//"admito_test";
                 $user = "root";
                 $pass = "";
