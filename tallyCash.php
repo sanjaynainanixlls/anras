@@ -58,7 +58,7 @@ include 'includeSession.php';
                         if(isset($_SESSION['tallyCash'])){
                             $disabled = 'disabled';
                             $msg =  'Total Cash Remaining Should Be: '.$_SESSION['tallyCash'].' INR'; 
-                            session_unset();
+                            //session_unset();
                         } ?>
                         <span <?php echo $disabled; ?>> <?php echo $msg; ?></span>
                         <button type="submit" class="btn btn-success" value="submit" <?php echo $disabled; ?> >Check</button>
