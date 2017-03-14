@@ -4,6 +4,48 @@ var totalOccupancy=0;
 $('#roomStatusTable').find('tr').each(function () {
 	var roomCapacity = $(this).find('.roomCapacityClass').text();
 	var numberOfPeople = $(this).find('.numberOfPeopleStayingClass').text();
+    var roomNumber = $(this).find('.roomNumberClass').text();
+    
+    if(roomNumber=='100'){
+        $(this).find('.roomNumberClass').text('Veranda Ground Floor D Block');
+    }
+    
+    if(roomNumber=='200'){
+        $(this).find('.roomNumberClass').text('Veranda Ground Floor Main Block');
+    }
+    
+    if(roomNumber=='1001'){
+        $(this).find('.roomNumberClass').text('Veranda First Floor A Block');
+    }
+    
+    if(roomNumber=='1002'){
+        $(this).find('.roomNumberClass').text('Veranda First Floor D Block');
+    }
+    
+    if(roomNumber=='1003'){
+        $(this).find('.roomNumberClass').text('Veranda First Floor Main Block');
+    }
+    
+    if(roomNumber=='2001'){
+        $(this).find('.roomNumberClass').text('Veranda Second Floor A Block');
+    }
+    
+    if(roomNumber=='2002'){
+        $(this).find('.roomNumberClass').text('Veranda Second Floor D Block');
+    }
+    
+    if(roomNumber=='2003'){
+        $(this).find('.roomNumberClass').text('Veranda Second Floor Main Block');
+    }
+    
+    if(roomNumber=='3001'){
+        $(this).find('.roomNumberClass').text('Veranda Third Floor Main Block');
+    }
+    
+    if(roomNumber=='4001'){
+        $(this).find('.roomNumberClass').text('Veranda Fourth Floor Main Block');
+    }
+    
 	if(roomCapacity != "" ){
 		totalRooms++;
 		totalCapacity = parseInt(roomCapacity,10) + parseInt(totalCapacity);

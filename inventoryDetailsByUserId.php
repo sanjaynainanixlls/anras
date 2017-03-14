@@ -1,7 +1,7 @@
 <?php
 if(!isset($_SESSION))
     session_start();
-    include 'includeSession.php';
+include 'includeSession.php';
 
 include dirname(dirname(__FILE__)) . '/anras/config/config.php';
 $postParams = Functions::getPostParams();
@@ -108,6 +108,12 @@ isset($result[0]) ? $data = $result[0] : '';
                                         <td>
                                             <div class="form-group">
                                                 <input type="number" id="lock" class="form-control" name="lock" disabled value="<?php if(isset($result[0]['lockNkey'])) echo $result[0]['lockNkey']; else echo ''; ?>">
+                                            </div>
+
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input type="number" id="dasCards" class="form-control" name="dasCards" disabled value="<?php if(isset($result[0]['dasCards'])) echo $result[0]['dasCards']; else echo ''; ?>">
                                             </div>
 
                                         </td>

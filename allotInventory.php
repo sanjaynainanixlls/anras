@@ -12,7 +12,13 @@ if ($postParams['action'] == 'allotInventory') {
     $disabled = '';
 }
 
-isset($result[0]) ? $data = $result[0] : '';
+if(isset($result[0])){
+    $isInventoryAlloted = $userDataHandlerObj->checkIfInventoryAlloted($id);
+    if(!isset($isInventoryAlloted[0])){
+        isset($result[0]) ? $data = $result[0] : '';
+    }
+}
+
 
 ?>
 <!DOCTYPE html>
@@ -106,6 +112,7 @@ isset($result[0]) ? $data = $result[0] : '';
                                         <th>Bedsheets</th>
                                         <th>Blankets</th>
                                         <th>Locks</th>
+                                        <th>Das Cards</th>
                                         <th>Submit</th>
                                     </tr>
                                 </thead>
@@ -142,6 +149,12 @@ isset($result[0]) ? $data = $result[0] : '';
 
                                         </td>
                                         <td>
+                                            <div class="form-group">
+                                                <input type="number" id="dasCards" class="form-control" name="dasCards" required="required" placeholder="das cards">
+                                            </div>
+
+                                        </td>
+                                        <td>
                                             <?php if(!isset($data['id'])){
                                                 $disabled = 'disabled';
                                             }?>
@@ -159,10 +172,18 @@ isset($result[0]) ? $data = $result[0] : '';
                     </div>
                     <!-- /.row -->
                 <?php } else{ ?>
-                    <div class="alert alert-error fade-in">
+                        <?php if($isInventoryAlloted==true){?>
+                            
+                        <div class="alert alert-error fade-in">
+                            <a href="#" class="close" data-dismiss="alert">&times;</a>
+                            <strong>Inventory has been already allotted to this user.</strong>
+                        </div>
+                        <?php } else{ ?>
+                        <div class="alert alert-error fade-in">
                             <a href="#" class="close" data-dismiss="alert">&times;</a>
                             <strong>No Record Found !!!</strong>
                         </div>
+                        <?php }?>
                 <?php }?>
                 </div>
                 <!-- /.container-fluid -->

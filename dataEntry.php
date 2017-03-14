@@ -102,13 +102,6 @@ $roomData = $userDataHandlerObj->allRoomStatus();
                                     <input type="date" id="returnDate" class="form-control" name="returnDate" required="required">
 
                                 </div>
-
-                                <div class="form-group">
-                                    <label>Total Amount To Be Collected</label>
-                                    <input id="totalAmountCard" type="text" class="form-control" readonly="" name="amountPaid" value="">
-                                </div>
-
-
                                 <button type="submit" class="btn btn-success">Submit</button>
                                 <button type="reset" class="btn btn-warning">Reset</button>
 

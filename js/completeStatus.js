@@ -1,4 +1,45 @@
+$('.completeStatusTableRow').each(function(index){
+		var roomNumber = $(this).find('.completeStatusTableRowRoomAlloted').text();
+        if(roomNumber=='100'){
+            $(this).find('.completeStatusTableRowRoomAlloted').text('Veranda Ground Floor D Block');
+        }
 
+        if(roomNumber=='200'){
+            $(this).find('.completeStatusTableRowRoomAlloted').text('Veranda Ground Floor Main Block');
+        }
+
+        if(roomNumber=='1001'){
+            $(this).find('.completeStatusTableRowRoomAlloted').text('Veranda First Floor A Block');
+        }
+
+        if(roomNumber=='1002'){
+            $(this).find('.completeStatusTableRowRoomAlloted').text('Veranda First Floor D Block');
+        }
+
+        if(roomNumber=='1003'){
+            $(this).find('.completeStatusTableRowRoomAlloted').text('Veranda First Floor Main Block');
+        }
+
+        if(roomNumber=='2001'){
+            $(this).find('.completeStatusTableRowRoomAlloted').text('Veranda Second Floor A Block');
+        }
+
+        if(roomNumber=='2002'){
+            $(this).find('.completeStatusTableRowRoomAlloted').text('Veranda Second Floor D Block');
+        }
+
+        if(roomNumber=='2003'){
+            $(this).find('.completeStatusTableRowRoomAlloted').text('Veranda Second Floor Main Block');
+        }
+
+        if(roomNumber=='3001'){
+            $(this).find('.completeStatusTableRowRoomAlloted').text('Veranda Third Floor Main Block');
+        }
+
+        if(roomNumber=='4001'){
+            $(this).find('.completeStatusTableRowRoomAlloted').text('Veranda Fourth Floor Main Block');
+        }
+	});
 
 $('#searchById').on('keyup', function(){
 	var searchText = parseInt($(this).val(), 10);
@@ -21,8 +62,8 @@ $('#searchById').on('keyup', function(){
 $('#searchByName').on('keyup', function(){
 	var searchText = $(this).val();
 	$('.completeStatusTableRow').each(function(index){
-		var idCellText = $(this).find('.completeStatusTableRowName').text();
-		if(idCellText.indexOf(searchText.toUpperCase())>-1){
+		var idCellText = $(this).find('.completeStatusTableRowName').text().toLowerCase();
+		if(idCellText.indexOf(searchText.toUpperCase())>-1 || idCellText.indexOf(searchText.toLowerCase())>-1){
 			$(this).show();
 		}
 		else{
@@ -39,8 +80,8 @@ $('#searchByName').on('keyup', function(){
 $('#searchByCity').on('keyup', function(){
 	var searchText = $(this).val();
 	$('.completeStatusTableRow').each(function(index){
-		var idCellText = $(this).find('.completeStatusTableRowCity').text();
-		if(idCellText.indexOf(searchText.toUpperCase())>-1){
+		var idCellText = $(this).find('.completeStatusTableRowCity').text().toLowerCase();
+		if(idCellText.indexOf(searchText.toUpperCase())>-1 || idCellText.indexOf(searchText.toLowerCase())>-1){
 			$(this).show();
 		}
 		else{

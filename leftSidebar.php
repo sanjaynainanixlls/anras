@@ -38,6 +38,15 @@ if (!isset($_SESSION)) {
                     <a href="checkout.php"><i class="fa fa-fw fa-minus"></i> Checkout A Room</a>
                 </li>
                 <li>
+                    <a href="inventoryById.php"><i class="fa fa-fw fa-plus"></i>Allot Inventory</a>
+                </li>
+                <li>
+                    <a href="returnInventoryById.php"><i class="fa fa-fw fa-minus"></i>Inventory Return</a>
+                </li>
+                <li>
+                    <a href="print.php"><i class="fa fa-fw fa-print"></i>Print Reciept</a>
+                </li>
+                <li>
                     <a href="#"><i class="fa fa-fw fa-pencil"></i> Edit Information</a>
                 </li>
                 <li>
@@ -61,6 +70,9 @@ if (!isset($_SESSION)) {
                 <li>
                     <a href="addUser.php"><i class="fa fa-fw fa-user"></i> Add New User</a>
                 </li>
+                <li>
+                    <a href="tallyCash.php"><i class="fa fa-fw fa-list"></i>Tally Cash</a>
+                </li>
                 <?php
             } else if (isset($_SESSION['role']) && $_SESSION['role'] == 'RECEPTION') {
                 ?>
@@ -69,6 +81,15 @@ if (!isset($_SESSION)) {
                 </li>
                 <li>
                     <a href="checkout.php"><i class="fa fa-fw fa-minus"></i> Checkout A Room</a>
+                </li>
+                <li>
+                    <a href="inventoryById.php"><i class="fa fa-fw fa-plus"></i>Allot Inventory</a>
+                </li>
+                <li>
+                    <a href="returnInventoryById.php"><i class="fa fa-fw fa-minus"></i>Inventory Return</a>
+                </li>
+                <li>
+                    <a href="print.php"><i class="fa fa-fw fa-print"></i>Print Reciept</a>
                 </li>
                 <li>
                     <a href="completeStatus.php"><i class="fa fa-fw fa-list"></i> Complete Status</a>

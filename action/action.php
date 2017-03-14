@@ -88,6 +88,11 @@ class Action {
                 header("location: ../inventoryById.php");
 
                 }
+            else{
+                session_start();
+                $_SESSION['message'] = "Inventory has been already alloted to this User. Please check.";
+                header("location: ../inventoryById.php");
+            }
         } else if($this->postParams['action'] == 'returnInventory') {
                 $userDataHandlerObj = new userDataHandler();
                 $result = $userDataHandlerObj->releaseInventory($this->postParams);
@@ -99,7 +104,7 @@ class Action {
         } else if($this->postParams['action'] == 'tallyCash') {
                 $userDataHandlerObj = new userDataHandler();
                 $result = $userDataHandlerObj->tallyCash($this->postParams);
-            if ($result) {
+            if (isset($result)) {
                 session_start();
                 $_SESSION['tallyCash'] = $result;
                 header("location: ../tallyCash.php");

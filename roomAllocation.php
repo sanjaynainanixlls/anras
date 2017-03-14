@@ -140,8 +140,6 @@ isset($result[0]) ? $data = $result[0] : '';
                                     <option value="44">G-44</option>
                                     <option value="45">G-45</option>
                                     <option value="46">G-46</option>
-                                    <option value="47">G-47</option>
-                                    <option value="48">G-48</option>
                                 </select>
                             </div>
                             
@@ -274,10 +272,7 @@ isset($result[0]) ? $data = $result[0] : '';
                                     
                                 </select>
                             </div>
-                            <div class="form-group">
-                                <label>Please collect this Amount</label>
-                                <input id="totalAmountCard" type="number" class="form-control" name="amountPaid" value="<?php if(isset($data['amountPaid']))echo $data['amountPaid'];else echo '';?>" required="required">
-                            </div>
+                            
                             <div class="form-group">
                             	<input name="roomNumberAlloted" id="roomNumberAlloted" type="number" value="" readonly="readonly"><span class="text-danger">Please check if this is the room number to be alloted</span>
                             </div>
