@@ -170,5 +170,7 @@ $pdf->Cell( 30, 8, "6", "BLR", 0, 'C', false );
 $pdf->Cell( 30, 8, "", "BLR", 0, 'C', false );
 $pdf->Cell( 30, 8, "1050", "BLR", 0, 'C', false );
 
+$pdf->Ln( 10 );
+
 $pdf->Output();
 ?>
