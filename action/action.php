@@ -32,7 +32,7 @@ class Action {
             $result = $userDataHandlerObj->registerUser($this->postParams);
             if (!empty($result)) {
                 session_start();
-                $_SESSION['message'] = "User with ID: " . $result[0]['id'] . " Added Successfully!";
+                $_SESSION['message'] = "Bhagat " . $result[0]['name'] . " from " . $result[0]['city'] . "  has been alloted ID: " . $result[0]['id'] . " .";
                 header("location: ../dataEntry.php");
             } else {
                 $_SESSION['error'] = "Invalid Username or Password!";
@@ -43,7 +43,7 @@ class Action {
             $result = $userDataHandlerObj->allocateRoom($this->postParams);
             if (!empty($result)) {
                 if ($_SESSION['role'] == 'ADMIN') {
-                    $_SESSION['message'] = "Room Number: ".$result[0]['roomNumberAllotted'].' has been Alloted to Bhagat id :'.$result[0]['id'];
+                    $_SESSION['message'] = "Bhagat ".$result[0]['name']." from ".$result[0]['city']." has been allotted Room Number: ".$result[0]['roomNumberAllotted'].' with id :'.$result[0]['id'];
                     header("location: ../home.php");
                 }
             }

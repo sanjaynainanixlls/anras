@@ -2,7 +2,7 @@
 if (!isset($_SESSION))
     session_start();
 include 'includeSession.php';
-include dirname(dirname(__FILE__)) . '/anras/config/config.php';
+include dirname(dirname(__FILE__)) . '/anandniwas.com/config/config.php';
 $userDataHandlerObj = new userDataHandler();
 $data = $userDataHandlerObj->todayCheckOutData();
 ?>

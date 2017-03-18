@@ -1,4 +1,9 @@
+$('.completeStatusTableRow:nth-child(-n+3)').each(function(){
+	$(this).css('background-color','yellow')
+});
+
 $('.completeStatusTableRow').each(function(index){
+
 		var roomNumber = $(this).find('.completeStatusTableRowRoomAlloted').text();
         if(roomNumber=='100'){
             $(this).find('.completeStatusTableRowRoomAlloted').text('Veranda Ground Floor D Block');

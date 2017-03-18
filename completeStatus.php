@@ -2,7 +2,7 @@
 if(!isset($_SESSION))
     session_start();
 include 'includeSession.php';
-include dirname(dirname(__FILE__)) . '/anras/action/completeStatusAction.php';
+include dirname(dirname(__FILE__)) . '/anandniwas.com/action/completeStatusAction.php';
 $userDataHandlerObj = new userDataHandler();
 $data = $userDataHandlerObj->getCompleteStatus();
 ?>
@@ -16,7 +16,7 @@ $data = $userDataHandlerObj->getCompleteStatus();
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
         <meta name="author" content="">
-
+        <meta http-equiv="refresh" content="60">
         <title>Complete Status</title>
 
         <!-- Bootstrap Core CSS -->

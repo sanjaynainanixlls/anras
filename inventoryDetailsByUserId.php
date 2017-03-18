@@ -3,7 +3,7 @@ if(!isset($_SESSION))
     session_start();
 include 'includeSession.php';
 
-include dirname(dirname(__FILE__)) . '/anras/config/config.php';
+include dirname(dirname(__FILE__)) . '/anandniwas/config/config.php';
 $postParams = Functions::getPostParams();
 if ($postParams['action'] == 'returnInventory') {
     $id = $postParams['userId'];

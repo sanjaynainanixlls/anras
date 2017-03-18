@@ -15,7 +15,7 @@ class userDataHandler {
         $result = queryRunner::doInsert($query);
 
         if ($result['status'] == 1) {
-            $query = "SELECT id FROM guest where name='" . $data["name"] . "'AND createdBy='". $data["userId"] ."' AND isCheckout = '0'  AND phoneNumber = '".$data['phoneNumber']."'";
+            $query = "SELECT id,name,city FROM guest where name='" . $data["name"] . "'AND createdBy='". $data["userId"] ."' AND isCheckout = '0'  AND phoneNumber = '".$data['phoneNumber']."'";
             $result = queryRunner::doSelect($query);
             return $result;
         }
@@ -53,7 +53,7 @@ class userDataHandler {
             }
         }
         if (!empty($result)){
-            $query = "SELECT id,roomNumberAllotted FROM guest WHERE roomNumberAllotted = '" . $data['roomNumberAlloted'] . "' AND isCheckout = '0' AND name = '".$data['name']."' AND phoneNumber = '".$data['phoneNumber']."'";
+            $query = "SELECT id,roomNumberAllotted,name,city FROM guest WHERE roomNumberAllotted = '" . $data['roomNumberAlloted'] . "' AND isCheckout = '0' AND name = '".$data['name']."' AND phoneNumber = '".$data['phoneNumber']."'";
             $result = queryRunner::doSelect($query);
             if(!empty($result)){
                 return $result;
@@ -63,7 +63,7 @@ class userDataHandler {
 
     //get complete status form guest table
     public  function getCompleteStatus() {
-        $query = "SELECT * FROM guest where isCheckout='0'";
+        $query = "SELECT * FROM guest where isCheckout='0' ORDER BY createdTime DESC";
         $result = queryRunner::doSelect($query);
         return $result;
     }
