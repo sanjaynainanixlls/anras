@@ -5,7 +5,7 @@ and open the template in the editor.
 */
 /* 
     Created on : Oct 1, 2016, 4:03:17 PM
-    Author     : Sanjit
+    Author     : Sanjay
 */
 
 
@@ -19,7 +19,6 @@ and open the template in the editor.
 .form {
   position: relative;
   z-index: 1;
-  background: #FFFFFF;
   max-width: 360px;
   margin: 0 auto 100px;
   padding: 45px;

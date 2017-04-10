@@ -1,8 +1,6 @@
-
 <?php
 
-if(!isset($_SESSION))
-    session_start();
+session_start();
     include 'includeSession.php';
 
 include dirname(dirname(__FILE__)) . '/anandniwas.com/config/config.php';
@@ -11,10 +9,12 @@ if ($postParams['action'] == 'checkout') {
     $id = $postParams['checkoutId'];
     $userDataHandlerObj = new userDataHandler();
     $result = $userDataHandlerObj->getCompleteStatusById($id);
+    
+    $inventoryDetails = $userDataHandlerObj->getinventoryDetailsById($id);
 }
 
 isset($result[0]) ? $data = $result[0] : '';
-
+isset($inventoryDetails[0]) ? $data1 = $inventoryDetails[0] : '';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -62,7 +62,22 @@ isset($result[0]) ? $data = $result[0] : '';
                         </div>
                     </div>
                     <!-- /.row -->
-
+                    <?php if (!isset($data['id'])) { ?>
+                        <div class="alert alert-success fade in">
+                            <a href="#" class="close" data-dismiss="alert">&times;</a>
+                            <strong style="font-size:16px">User with this ID does not exist.</strong>
+                        </div>
+                    <?php } else if ($data['isCheckout'] == '1') { ?>
+                        <div class="alert alert-success fade in">
+                            <a href="#" class="close" data-dismiss="alert">&times;</a>
+                            <strong style="font-size:16px">This user is already checked out.</strong>
+                        </div>
+                    <?php } else if ($data1['isReturned'] == '0') { ?>
+                        <div class="alert alert-success fade in">
+                            <a href="#" class="close" data-dismiss="alert">&times;</a>
+                            <strong style="font-size:16px">This user has not returned Inventory Yet. Please ask him to return inventory first.</strong>
+                        </div>
+                    <?php } else {?>
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="table-responsive">
@@ -100,6 +115,7 @@ isset($result[0]) ? $data = $result[0] : '';
                                     </table>
                                     <button type="Submit"  class="btn btn-success">Checkout Now</button>
                                 </form>
+                                <?php } ?>
                                 <a href="checkout.php"><button  class="btn btn-warning text-center" style="margin-top:20px;">Search Again</button></a>
                             </div>
 
@@ -108,6 +124,7 @@ isset($result[0]) ? $data = $result[0] : '';
 
                         </div>
                     </div>
+                    
                     <!-- /.row -->
                 </div>
                 <!-- /.container-fluid -->

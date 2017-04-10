@@ -79,7 +79,99 @@ $roomData = $userDataHandlerObj->allRoomStatus();
 
                                 <div class="form-group">
                                     <label>City</label>
-                                    <input type="text" id="city" class="form-control" name="city" required="required" placeholder="City">
+                                    <select id="city" name="city" class="form-control" required>
+              <option <?php if(!isset($data['city']) || $data['city']=="") { ?> selected <?php } ?> value="">Please Select City</option>
+              <option <?php if(isset($data['city']) && $data['city']=="ABU ROAD") { ?> selected <?php } ?> value="ABU ROAD">ABU ROAD</option>
+              <option <?php if(isset($data['city']) && $data['city']=="AGRA") { ?> selected <?php } ?> value="AGRA">AGRA</option>
+              <option <?php if(isset($data['city']) && $data['city']=="AHEMDABAD") { ?> selected <?php } ?> value="AHEMDABAD">AHEMDABAD</option>
+              <option <?php if(isset($data['city']) && $data['city']=="AJMER") { ?> selected <?php } ?> value="AJMER">AJMER</option>
+              <option <?php if(isset($data['city']) && $data['city']=="ALLAHBAD") { ?> selected <?php } ?> value="ALLAHBAD">ALLAHBAD</option>
+              <option <?php if(isset($data['city']) && $data['city']=="AMRITSAR") { ?> selected <?php } ?> value="AMRITSAR">AMRITSAR</option>
+              <option <?php if(isset($data['city']) && $data['city']=="BANDA") { ?> selected <?php } ?> value="BANDA">BANDA</option>
+              <option <?php if(isset($data['city']) && $data['city']=="BANGKOK") { ?> selected <?php } ?> value="BANGKOK">BANGKOK</option>
+              <option <?php if(isset($data['city']) && $data['city']=="BANGALORE") { ?> selected <?php } ?> value="BANGALORE">BANGALORE</option>
+              <option <?php if(isset($data['city']) && $data['city']=="BAREILY") { ?> selected <?php } ?> value="BAREILY">BAREILY</option>
+              <option <?php if(isset($data['city']) && $data['city']=="BEAWAR") { ?> selected <?php } ?> value="BEAWAR">BEAWAR</option>
+              <option <?php if(isset($data['city']) && $data['city']=="BHARUCH") { ?> selected <?php } ?> value="BHARUCH">BHARUCH</option>
+              <option <?php if(isset($data['city']) && $data['city']=="BHAVNAGAR") { ?> selected <?php } ?> value="BHAVNAGAR">BHAVNAGAR</option>
+              <option <?php if(isset($data['city']) && $data['city']=="BHAWANI MANDI") { ?> selected <?php } ?> value="BHAWANI MANDI">BHAWANI MANDI</option>
+              <option <?php if(isset($data['city']) && $data['city']=="BHILWARA") { ?> selected <?php } ?> value="BHILWARA">BHILWARA</option>
+              <option <?php if(isset($data['city']) && $data['city']=="BHOPAL") { ?> selected <?php } ?> value="BHOPAL">BHOPAL</option>
+              <option <?php if(isset($data['city']) && $data['city']=="BIJAPUR") { ?> selected <?php } ?> value="BIJAPUR">BIJAPUR</option>
+              <option <?php if(isset($data['city']) && $data['city']=="BUNDI") { ?> selected <?php } ?> value="BUNDI">BUNDI</option>
+              <option <?php if(isset($data['city']) && $data['city']=="BILASPUR") { ?> selected <?php } ?> value="BILASPUR">BILASPUR</option>
+              <option <?php if(isset($data['city']) && $data['city']=="CHHADVEL") { ?> selected <?php } ?> value="CHHADVEL">CHHADVEL</option>
+              <option <?php if(isset($data['city']) && $data['city']=="CHALISGAON") { ?> selected <?php } ?> value="CHALISGAON">CHALISGAON</option>
+              <option <?php if(isset($data['city']) && $data['city']=="CHENNAI") { ?> selected <?php } ?> value="CHENNAI">CHENNAI</option>
+              <option <?php if(isset($data['city']) && $data['city']=="COLLEGE PARK") { ?> selected <?php } ?> value="COLLEGE PARK">COLLEGE PARK</option>
+              <option <?php if(isset($data['city']) && $data['city']=="DAHOD") { ?> selected <?php } ?> value="DAHOD">DAHOD</option>
+              <option <?php if(isset($data['city']) && $data['city']=="DELHI") { ?> selected <?php } ?> value="DELHI">DELHI</option>
+              <option <?php if(isset($data['city']) && $data['city']=="DEWAS") { ?> selected <?php } ?> value="DEWAS">DEWAS</option>
+              <option <?php if(isset($data['city']) && $data['city']=="DHULE") { ?> selected <?php } ?> value="DHULE">DHULE</option>
+              <option <?php if(isset($data['city']) && $data['city']=="DHOND") { ?> selected <?php } ?> value="DHOND">DHOND</option>
+              <option <?php if(isset($data['city']) && $data['city']=="DUBAI") { ?> selected <?php } ?> value="DUBAI">DUBAI</option>
+              <option <?php if(isset($data['city']) && $data['city']=="ETAWAH") { ?> selected <?php } ?> value="ETAWAH">ETAWAH</option>
+              <option <?php if(isset($data['city']) && $data['city']=="FAIZABAD") { ?> selected <?php } ?> value="FAIZABAD">FAIZABAD</option>
+              <option <?php if(isset($data['city']) && $data['city']=="GANDHIDHAM") { ?> selected <?php } ?> value="GANDHIDHAM">GANDHIDHAM</option>
+              <option <?php if(isset($data['city']) && $data['city']=="GODHARA") { ?> selected <?php } ?> value="GODHARA">GODHARA</option>
+              <option <?php if(isset($data['city']) && $data['city']=="GORAKHPUR") { ?> selected <?php } ?> value="GORAKHPUR">GORAKHPUR</option>
+              <option <?php if(isset($data['city']) && $data['city']=="GWALIOR") { ?> selected <?php } ?> value="GWALIOR">GWALIOR</option>
+              <option <?php if(isset($data['city']) && $data['city']=="HAMILTON") { ?> selected <?php } ?> value="HAMILTON">HAMILTON</option>
+              <option <?php if(isset($data['city']) && $data['city']=="HAROA") { ?> selected <?php } ?> value="HAROA">HAROA</option>
+              <option <?php if(isset($data['city']) && $data['city']=="HONG KONG") { ?> selected <?php } ?> value="HONG KONG">HONG KONG</option>
+              <option <?php if(isset($data['city']) && $data['city']=="HYDERABAD") { ?> selected <?php } ?> value="HYDERABAD">HYDERABAD</option>  
+              <option <?php if(isset($data['city']) && $data['city']=="INDORE") { ?> selected <?php } ?> value="INDORE">INDORE</option>
+              <option <?php if(isset($data['city']) && $data['city']=="JABALPUR") { ?> selected <?php } ?> value="JABALPUR">JABALPUR</option>
+              <option <?php if(isset($data['city']) && $data['city']=="JAIPUR") { ?> selected <?php } ?> value="JAIPUR">JAIPUR</option>
+              <option <?php if(isset($data['city']) && $data['city']=="JAMNAGAR") { ?> selected <?php } ?> value="JAMNAGAR">JAMNAGAR</option>
+              <option <?php if(isset($data['city']) && $data['city']=="JHANSI") { ?> selected <?php } ?> value="JHANSI">JHANSI</option>
+              <option <?php if(isset($data['city']) && $data['city']=="JODHPUR") { ?> selected <?php } ?> value="JODHPUR">JODHPUR</option>
+              <option <?php if(isset($data['city']) && $data['city']=="JUNAGARH") { ?> selected <?php } ?> value="JUNAGARH">JUNAGARH</option>
+              <option <?php if(isset($data['city']) && $data['city']=="KALOL") { ?> selected <?php } ?> value="KALOL">KALOL</option>
+              <option <?php if(isset($data['city']) && $data['city']=="KANPUR") { ?> selected <?php } ?> value="KANPUR">KANPUR</option>
+              <option <?php if(isset($data['city']) && $data['city']=="KATNI") { ?> selected <?php } ?> value="KATNI">KATNI</option>
+              <option <?php if(isset($data['city']) && $data['city']=="KHAIRTHAL") { ?> selected <?php } ?> value="KHAIRTHAL">KHAIRTHAL</option>
+              <option <?php if(isset($data['city']) && $data['city']=="KHANDWA") { ?> selected <?php } ?> value="KHANDWA">KHANDWA</option>
+              <option <?php if(isset($data['city']) && $data['city']=="KOLKATA") { ?> selected <?php } ?> value="KOLKATA">KOLKATA</option>
+              <option <?php if(isset($data['city']) && $data['city']=="KOTA") { ?> selected <?php } ?> value="KOTA">KOTA</option>
+              <option <?php if(isset($data['city']) && $data['city']=="LOS ANGELES") { ?> selected <?php } ?> value="LOS ANGELES">LOS ANGELES</option>
+              <option <?php if(isset($data['city']) && $data['city']=="LUCKNOW") { ?> selected <?php } ?> value="LUCKNOW">LUCKNOW</option>
+              <option <?php if(isset($data['city']) && $data['city']=="MAIHAR") { ?> selected <?php } ?> value="MAIHAR">MAIHAR</option>
+              <option <?php if(isset($data['city']) && $data['city']=="MALEGAON") { ?> selected <?php } ?> value="MALEGAON">MALEGAON</option>
+              <option <?php if(isset($data['city']) && $data['city']=="MANDSOR") { ?> selected <?php } ?> value="MANDSOR">MANDSOR</option>
+              <option <?php if(isset($data['city']) && $data['city']=="MANILA") { ?> selected <?php } ?> value="MANILA">MANILA</option>
+              <option <?php if(isset($data['city']) && $data['city']=="MASSACHUSETTS") { ?> selected <?php } ?> value="MASSACHUSETTS">MASSACHUSETTS</option>
+              <option <?php if(isset($data['city']) && $data['city']=="MUMBAI") { ?> selected <?php } ?> value="MUMBAI">MUMBAI</option>
+              <option <?php if(isset($data['city']) && $data['city']=="NASHIK") { ?> selected <?php } ?> value="NASHIK">NASHIK</option>
+              <option <?php if(isset($data['city']) && $data['city']=="NAUSARI") { ?> selected <?php } ?> value="NAUSARI">NAUSARI</option>
+              <option <?php if(isset($data['city']) && $data['city']=="NEW YORK") { ?> selected <?php } ?> value="NEW YORK">NEW YORK</option>
+              <option <?php if(isset($data['city']) && $data['city']=="NIMBAHEDA") { ?> selected <?php } ?> value="NIMBAHEDA">NIMBAHEDA</option>
+              <option <?php if(isset($data['city']) && $data['city']=="ORAI") { ?> selected <?php } ?> value="ORAI">ORAI</option>
+              <option <?php if(isset($data['city']) && $data['city']=="OTHER") { ?> selected <?php } ?> value="OTHER">OTHER</option>
+              <option <?php if(isset($data['city']) && $data['city']=="PACHORA") { ?> selected <?php } ?> value="PACHORA">PACHORA</option>
+              <option <?php if(isset($data['city']) && $data['city']=="PANNA") { ?> selected <?php } ?> value="PANNA">PANNA</option>    
+              <option <?php if(isset($data['city']) && $data['city']=="PIMPRI") { ?> selected <?php } ?> value="PIMPRI">PIMPRI</option>
+              <option <?php if(isset($data['city']) && $data['city']=="PUNE") { ?> selected <?php } ?> value="PUNE">PUNE</option>
+              <option <?php if(isset($data['city']) && $data['city']=="RAIGARH") { ?> selected <?php } ?> value="RAIGARH">RAIGARH</option>
+              <option <?php if(isset($data['city']) && $data['city']=="RAJKOT") { ?> selected <?php } ?> value="RAJKOT">RAJKOT</option>
+              <option <?php if(isset($data['city']) && $data['city']=="RATLAM") { ?> selected <?php } ?> value="RATLAM">RATLAM</option>
+              <option <?php if(isset($data['city']) && $data['city']=="REWA") { ?> selected <?php } ?> value="REWA">REWA</option>
+              <option <?php if(isset($data['city']) && $data['city']=="SATNA") { ?> selected <?php } ?> value="SATNA">SATNA</option>
+              <option <?php if(isset($data['city']) && $data['city']=="SECUNDRABAD") { ?> selected <?php } ?> value="SECUNDRABAD">SECUNDRABAD</option>
+              <option <?php if(isset($data['city']) && $data['city']=="SHAHADRA") { ?> selected <?php } ?> value="SHAHADRA">SHAHADRA</option>
+              <option <?php if(isset($data['city']) && $data['city']=="SINDH") { ?> selected <?php } ?> value="SINDH">SINDH</option>
+              <option <?php if(isset($data['city']) && $data['city']=="SINGAPORE") { ?> selected <?php } ?> value="SINGAPORE">SINGAPORE</option>
+              <option <?php if(isset($data['city']) && $data['city']=="SOLAPUR") { ?> selected <?php } ?> value="SOLAPUR">SOLAPUR</option>
+              <option <?php if(isset($data['city']) && $data['city']=="SUGAR LAND") { ?> selected <?php } ?> value="SUGAR LAND">SUGAR LAND</option>
+              <option <?php if(isset($data['city']) && $data['city']=="SURAT") { ?> selected <?php } ?> value="SURAT">SURAT</option>
+              <option <?php if(isset($data['city']) && $data['city']=="UJJAIN") { ?> selected <?php } ?> value="UJJAIN">UJJAIN</option>
+              <option <?php if(isset($data['city']) && $data['city']=="ULHAS NAGAR") { ?> selected <?php } ?> value="ULHAS NAGAR">ULHAS NAGAR</option>
+              <option <?php if(isset($data['city']) && $data['city']=="UMARIA") { ?> selected <?php } ?> value="UMARIA">UMARIA</option>
+              <option <?php if(isset($data['city']) && $data['city']=="VADODRA") { ?> selected <?php } ?> value="VADODRA">VADODRA</option>
+              <option <?php if(isset($data['city']) && $data['city']=="VALSAD") { ?> selected <?php } ?> value="VALSAD">VALSAD</option>
+              <option <?php if(isset($data['city']) && $data['city']=="VARANASI") { ?> selected <?php } ?> value="VARANASI">VARANASI</option>
+              <option <?php if(isset($data['city']) && $data['city']=="VIDISHA") { ?> selected <?php } ?> value="VIDISHA">VIDISHA</option>
+    </select>
                                 </div>
 
                                 <div class="form-group">

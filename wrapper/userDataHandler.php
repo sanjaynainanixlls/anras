@@ -39,7 +39,7 @@ class userDataHandler {
                 $res = queryRunner::doUpdate($qry);
             }
         } else {
-            $query = "UPDATE guest SET roomNumberAllotted = '" . $data['roomNumberAlloted'] . "' WHERE id ='" . $data['id'] . "'";
+            $query = "UPDATE guest SET roomNumberAllotted = '" . $data['roomNumberAlloted'] . "', name = '" . $data['name'] . "', phoneNumber = '" . $data['phoneNumber'] . "', city = '" . $data['city'] . "', numberOfPeople = '" . $data['numberOfPeople'] . "', dateOfArrival = '" . $data['comingDate'] . "', dateOfDeparture = '" . $data['returnDate'] . "'  WHERE id ='" . $data['id'] . "'";
             $result = queryRunner::doUpdate($query);
             $sql1 = "SELECT DISTINCT city FROM guest WHERE roomNumberAllotted = '" . $data['roomNumberAlloted'] . "' AND isCheckout = '0'";
             $cityData = queryRunner::doSelect($sql1);
@@ -52,6 +52,17 @@ class userDataHandler {
                 $res = queryRunner::doUpdate($qry);
             }
         }
+        
+        $oldCities = '';
+        $queryToUpdateOldRoom = "SELECT DISTINCT city FROM guest WHERE roomNumberAllotted = '" . $data['oldRoomNumber'] . "' AND isCheckout = '0'";
+                $oldCityData = queryRunner::doSelect($queryToUpdateOldRoom);
+                for ($i = 0; $i < count($oldCityData); $i++) {
+                    $oldCities .= $oldCityData[$i]['city'] . ",";
+                }
+                $oldCities = rtrim($oldCities, ",");
+                $queryToUpdateOldRoom = "update rooms set occupied = occupied - " . $data['oldNumberOfPeople'] . " , city = '" . $oldCities . "' where roomNumber = '" . $data['oldRoomNumber'] . "'";
+                $res = queryRunner::doUpdate($queryToUpdateOldRoom);
+        
         if (!empty($result)){
             $query = "SELECT id,roomNumberAllotted,name,city FROM guest WHERE roomNumberAllotted = '" . $data['roomNumberAlloted'] . "' AND isCheckout = '0' AND name = '".$data['name']."' AND phoneNumber = '".$data['phoneNumber']."'";
             $result = queryRunner::doSelect($query);
@@ -64,6 +75,12 @@ class userDataHandler {
     //get complete status form guest table
     public  function getCompleteStatus() {
         $query = "SELECT * FROM guest where isCheckout='0' ORDER BY createdTime DESC";
+        $result = queryRunner::doSelect($query);
+        return $result;
+    }
+    
+    public  function getCompleteInventoryAlotted() {
+        $query = "SELECT * FROM inventory where isReturned = '0'";
         $result = queryRunner::doSelect($query);
         return $result;
     }
@@ -83,6 +100,20 @@ class userDataHandler {
         $result = queryRunner::doSelect($query);
         return $result;
     }
+    
+    public function checkIf2KeysAlreadyAllotted($roomNumber) {
+        $getCountOfKeys = 0;
+        if (isset($roomNumber) && !empty($roomNumber)) {
+            $query = "SELECT id FROM guest Where isCheckout = '0' AND roomNumberAllotted= '" . $roomNumber . "'";
+            $result = queryRunner::doSelect($query);
+            for ($i = 0; $i < count($result); $i++) {
+                $getCountOfKeysQuery = "Select lockNKey from inventory where isReturned = '0' and guestUserId = '".$result[$i]['id']."'";
+                $result2 = queryRunner::doSelect($getCountOfKeysQuery);
+                $getCountOfKeys = $getCountOfKeys + $result2[0]['lockNKey'];
+            }
+        }
+        return $getCountOfKeys;
+    }
 
     public function checkoutUserById($id) {
         if (isset($id['checkoutId']) && !empty($id['checkoutId'])) {
@@ -100,7 +131,7 @@ class userDataHandler {
     public function checkOutUser($data) {
         $city = '';
         if ((isset($data['userId']) && !empty($data['userId']))) {
-            $query1 = "UPDATE guest SET isCheckout = '1' WHERE id = '" . $data['userId'] . "'";
+            $query1 = "UPDATE guest SET isCheckout = '1' WHERE id = '" . $data['userId'] . "' AND isCheckout='0'";
             $userData = queryRunner::doUpdate($query1);
             if ($userData['status'] == 1) {
                 $sql1 = "SELECT DISTINCT city FROM guest WHERE roomNumberAllotted = '" . $data['roomNumberAllotted'] . "' AND isCheckout = '0'";
@@ -221,8 +252,30 @@ class userDataHandler {
         return $returnArray;
     }
     
+    public function releaseInventoryAndCheckout($data1) {
+        $city = '';
+        $query = "UPDATE inventory set isReturned='1' where guestUserId='".$data1['userId']."'";
+        $query1 = "UPDATE guest set isCheckout='1' where id='".$data1['userId']."'";
+        $query2 = "Select * from guest where id='".$data1['userId']."'";
+        $result = queryRunner::doUpdate($query);
+        $result2 = queryRunner::doUpdate($query1);
+        $result3 = queryRunner::doSelect($query2);
+        isset($result3[0]) ? $data = $result3[0] : '';
+        $sql1 = "SELECT DISTINCT city FROM guest WHERE roomNumberAllotted = '" . $data['roomNumberAllotted'] . "' AND isCheckout = '0'";
+                $cityData = queryRunner::doSelect($sql1);
+                for ($i = 0; $i < count($cityData); $i++) {
+                    $city .= $cityData[$i]['city'] . ",";
+                }
+                $city = rtrim($city, ",");
+                $qry = "update rooms set occupied = occupied - " . $data['numberOfPeople'] . " , city = '" . $city . "' where roomNumber = '" . $data['roomNumberAllotted'] . "'";
+                $res = queryRunner::doUpdate($qry);
+        
+        $returnArray = array($data1['returnAmount'], $data1['userId']);
+        return $returnArray;
+    }
+    
     public function tallyCash($data){
-        $query1 = "SELECT (sum(pillow)/2)+SUM(mattress)+SUM(quilt)+SUM(bedsheet)+SUM(lockNkey)+SUM(dasCards) as moneyDeposits FROM inventory WHERE isReturned='0' AND createdBy='".$data['userId']."'";
+        $query1 = "SELECT (sum(pillow)/2)+SUM(mattress)+SUM(quilt)+SUM(bedsheet)+SUM(lockNkey)+SUM(dasCards/2) as moneyDeposits FROM inventory WHERE isReturned='0'";
         $result1 = queryRunner::doSelect($query1);
         //$result = (($result1[0]['moneyDeposits']) - ($result2[0]['moneyDeposits']));
         //

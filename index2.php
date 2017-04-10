@@ -18,6 +18,7 @@ body {
 <img src="img/das-trans.png" style="width:100px; position:absolute; top:85%; left:90%">
 <div class="login-page">
   <div class="form">
+<!--
       <form class="register-form" action="action/CheckUser.php">
       <input type="text" placeholder="name"/>
       <input type="password" placeholder="password"/>
@@ -31,6 +32,8 @@ body {
       <input type="hidden" name="action" value='login'>
       <button>login</button>
     </form>
+-->
+      <h1 style="color:white">Site is under maintenance.</h1>
   </div>
 </div>
 

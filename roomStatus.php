@@ -74,23 +74,25 @@ $data = $userDataHandlerObj->allRoomStatus();
                         </div>
                     </div>
                     <!-- /.row -->
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div style="padding:10px;">
-                                <button class="btn btn-lg btn-info">Total Rooms: <span id="totalRooms"></span></button>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div style="padding:10px;">
-                                <button class="btn btn-lg btn-info">Total Capacity: <span id="totalCapacity"></span></button>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div style="padding:10px;">
-                                <button class="btn btn-lg btn-info">Total Occupancy: <span id="totalOccupancy"></span></button>
-                            </div>
-                        </div>
-                    </div>
+                    <table class="table table-bordered table-hover">
+                        <tr style="text-align:center" class="text-center">
+                            <th style="text-align:center">Total Rooms</th>
+                            <th style="text-align:center">Total Capacity of Rooms</th>
+                            <th style="text-align:center">Total Occupancy of Rooms</th>
+                            <th style="text-align:center">Total Capacity of Veranda</th>
+                            <th style="text-align:center">Total Occupancy in Veranda</th>
+                            
+                        </tr>
+                        <tr class="text-center">
+                            <td id="totalRooms"></td>
+                            <td id="totalCapacity"></td>
+                            <td id="totalOccupancy"></td>
+                            <td id="totalCapacityVeranda"></td>
+                            <td id="totalOccupancyVeranda"></td>
+                            
+                        </tr>
+                    </table>
+                    
 
                     <div class="row">
                         <div class="col-lg-12">

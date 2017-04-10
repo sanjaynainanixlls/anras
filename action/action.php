@@ -52,8 +52,10 @@ class Action {
             $result = $userDataHandlerObj->checkOutUser($this->postParams);
             if ($result['status'] == 1) {
                 if ($_SESSION['role'] == 'ADMIN') {
+                    $_SESSION['message'] = "The user has been checked out.";
                     header("location: ../home.php");
                 } elseif ($_SESSION['role'] == 'RECEPTION') {
+                    $_SESSION['message'] = "The user has been checked out.";
                     header("location: ../dataEntry.php");
                 }
             }
@@ -85,7 +87,8 @@ class Action {
             if (!empty($result)) {
                 session_start();
                 $_SESSION['message'] = "Inventory Alloted to User: " . $result[0] . ', Please Collect ' . $result[1] . ' INR';
-                header("location: ../inventoryById.php");
+                $_SESSION['printId'] = $result[0];
+                header("location: ../printFormat.php");
 
                 }
             else{
@@ -98,7 +101,15 @@ class Action {
                 $result = $userDataHandlerObj->releaseInventory($this->postParams);
             if (!empty($result)) {
                 session_start();
-                $_SESSION['message'] = "Return ".$result[0].' INR to UserId: '.$result[1];
+                $_SESSION['message'] = "Return ".(int)$result[0].' INR to UserId: '.$result[1];
+                header("location: ../returnInventoryById.php");
+                }
+        } else if($this->postParams['action'] == 'returnInventoryAndCheckout') {
+                $userDataHandlerObj = new userDataHandler();
+                $result = $userDataHandlerObj->releaseInventoryAndCheckout($this->postParams);
+            if (!empty($result)) {
+                session_start();
+                $_SESSION['message'] = "User Successfully Checked Out and Inventory Returned. Return ".$result[0].' INR to UserId: '.$result[1];
                 header("location: ../returnInventoryById.php");
                 }
         } else if($this->postParams['action'] == 'tallyCash') {

@@ -92,6 +92,7 @@ $data = $userDataHandlerObj->getCompleteStatus();
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <?php if(!empty($data)){?>
                                         <?php foreach ($data as $key => $value) { ?>
                                         <tr class="completeStatusTableRow">
                                                 <td class="completeStatusTableRowId"><?php echo $value['id']; ?></td>
@@ -112,7 +113,7 @@ $data = $userDataHandlerObj->getCompleteStatus();
                                                     }
                                                     ?></td>
                                         </tr>
-                                        <?php } ?>
+                                        <?php } }?>
                                     </tbody>
                                 </table>
                             </div>

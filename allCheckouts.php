@@ -51,11 +51,11 @@ $data = $userDataHandlerObj->allCheckOutData();
                     <div class="row">
                         <div class="col-lg-12">
                             <h1 class="page-header">
-                                Complete Status Of People
+                                Complete Status of Checked Out People
                             </h1>
                             <ol class="breadcrumb">
                                 <li class="active">
-                                    <i class="fa fa-table"></i> Complete Status Of People
+                                    <i class="fa fa-table"></i> Complete Status of Checked Out People
                                 </li>
                             </ol>
                         </div>

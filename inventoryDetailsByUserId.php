@@ -3,7 +3,7 @@ if(!isset($_SESSION))
     session_start();
 include 'includeSession.php';
 
-include dirname(dirname(__FILE__)) . '/anandniwas/config/config.php';
+include dirname(dirname(__FILE__)) . '/anandniwas.com/config/config.php';
 $postParams = Functions::getPostParams();
 if ($postParams['action'] == 'returnInventory') {
     $id = $postParams['userId'];
@@ -76,7 +76,9 @@ isset($result[0]) ? $data = $result[0] : '';
                                         <th>Bedsheets</th>
                                         <th>Blankets</th>
                                         <th>Locks</th>
-                                        <th>Submit</th>
+                                        <th>Das Cards</th>
+                                        <th>Option 1</th>
+                                        <th>Option 2</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -119,10 +121,20 @@ isset($result[0]) ? $data = $result[0] : '';
                                         </td>
                                         <td>
                                             <div class="form-group">
-                                                <input type="submit" id="releaseNow" name="releaseNow" class="form-control btn btn-primary">
+                                                <input type="submit" value="Return Only" id="releaseNow" name="releaseNow" class="form-control btn btn-primary">
                                             </div>
-
                                         </td>
+                                    </form>
+                                    <form method="POST" action="action/action.php" name="returnInventoryAndCheckout">
+                                    <input type="hidden" name="action" value="returnInventoryAndCheckout">
+                                    <input type="hidden" name="returnAmount" value="<?php if(isset($data['totalAmount'])) echo $data['totalAmount']; else echo ''; ?>">
+                                    <input type="hidden" name="userId" value="<?php if(isset($data['guestUserId']))  echo $data['guestUserId'];?>"> 
+                                    <td>
+                                        <div class="form-group">
+                                            <input value="Return And Checkout" type="submit" id="releaseNow" name="releaseNow" class="form-control btn btn-primary">
+                                        </div>
+                                    </td>
+                                        
 
                                     </tr>
                                 </tbody>

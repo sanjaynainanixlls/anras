@@ -14,10 +14,14 @@ if ($postParams['action'] == 'allotInventory') {
 
 if(isset($result[0])){
     $isInventoryAlloted = $userDataHandlerObj->checkIfInventoryAlloted($id);
-    if(!isset($isInventoryAlloted[0])){
-        isset($result[0]) ? $data = $result[0] : '';
-    }
+    isset($result[0]) ? $data = $result[0] : '';
+    $are2KeysAlreadyAllottedForRoomNumber = $userDataHandlerObj->checkIf2KeysAlreadyAllotted($data['roomNumberAllotted']);
 }
+
+
+
+
+
 
 
 ?>
@@ -32,7 +36,7 @@ if(isset($result[0])){
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Do Checkout</title>
+        <title>Allot Inventory</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -67,7 +71,30 @@ if(isset($result[0])){
                         </div>
                     </div>
                     <!-- /.row -->
-                <?php if(isset($data['id'])){?>
+                    <?php if(isset($result[0])){  
+                        if ($data['isCheckout'] == '1') { ?>
+                        <div class="alert alert-success fade in">
+                            <a href="#" class="close" data-dismiss="alert">&times;</a>
+                            <strong style="font-size:16px">This user is already checked out.</strong>
+                        </div>
+                        <? } else if(!isset($data['roomNumberAllotted']) || empty($data['roomNumberAllotted']) || $data['roomNumberAllotted'] == NULL){ ?>
+                                <div class="alert alert-error fade-in">
+                                    <a href="#" class="close" data-dismiss="alert">&times;</a>
+                                    <strong>Room Number is Not Alloted to the user. Please ask admin to Allot Room.</strong>
+                                </div>
+                        <?php } else if(isset($isInventoryAlloted[0])){ ?>
+                                <div class="alert alert-error fade-in">
+                                    <a href="#" class="close" data-dismiss="alert">&times;</a>
+                                    <strong>Inventory has been already allotted to this user.</strong>
+                                </div>
+                                <?php } else {
+                                if(isset($are2KeysAlreadyAllottedForRoomNumber) && $are2KeysAlreadyAllottedForRoomNumber >= 2){ ?>
+                                    <div class="alert alert-error fade-in">
+                                        <a href="#" class="close" data-dismiss="alert">&times;</a>
+                                        <strong>2 Keys for this room have been given. So no New keys can be given.</strong>
+                                    </div>
+                                <? } ?>
+                    
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="table-responsive">
@@ -99,7 +126,7 @@ if(isset($result[0])){
                                         </tbody>
                                     </table>
                                 </form>
-                                <form method="POST" action="action/action.php" name="allotInventory">
+                                <form id="allotInventoryForm" method="POST" action="action/action.php" name="allotInventory">
                                     <input type="hidden" name="action" value="allotInventory">
                                     <input type="hidden" name="createdBy" value="<?php if(isset($_SESSION['userId'])) echo $_SESSION['userId']; else echo ''; ?>">
                                     <input type="hidden" name="userId" value="<?php if(isset($data['id']))  echo $data['id'];?>">
@@ -111,7 +138,7 @@ if(isset($result[0])){
                                         <th>Pillows</th>
                                         <th>Bedsheets</th>
                                         <th>Blankets</th>
-                                        <th>Locks</th>
+                                        <th>Keys</th>
                                         <th>Das Cards</th>
                                         <th>Submit</th>
                                     </tr>
@@ -144,7 +171,7 @@ if(isset($result[0])){
                                         </td>
                                         <td>
                                             <div class="form-group">
-                                                <input type="number" id="lock" class="form-control" name="lock" required="required" placeholder="lock">
+                                                <input type="number" <?php if(isset($are2KeysAlreadyAllottedForRoomNumber) && $are2KeysAlreadyAllottedForRoomNumber >= 2) { ?> disabled value="0" <?php } else if(isset($are2KeysAlreadyAllottedForRoomNumber) && $are2KeysAlreadyAllottedForRoomNumber < 2 ) { $maxValue = (2 - $are2KeysAlreadyAllottedForRoomNumber) ?> max="<?php echo $maxValue ?>" <?php } ?> id="lock" class="form-control" name="lock" required="required" placeholder="keys">
                                             </div>
 
                                         </td>
@@ -159,7 +186,7 @@ if(isset($result[0])){
                                                 $disabled = 'disabled';
                                             }?>
                                             <div class="form-group">
-                                                <input type="submit" <?php echo $disabled; ?> id="allotNow" name="allotNow" class="form-control btn btn-primary">
+                                                <input type="submit" value="Submit & Print" <?php echo $disabled; ?> id="allotNow" name="allotNow" class="form-control btn btn-primary">
                                             </div>
 
                                         </td>
@@ -167,23 +194,16 @@ if(isset($result[0])){
                                     </tr>
                                 </tbody>
                             </table>
+                            </form>
                             </div>
                         </div>
                     </div>
                     <!-- /.row -->
-                <?php } else{ ?>
-                        <?php if($isInventoryAlloted==true){?>
-                            
+                <?php } }else{ ?>
                         <div class="alert alert-error fade-in">
                             <a href="#" class="close" data-dismiss="alert">&times;</a>
-                            <strong>Inventory has been already allotted to this user.</strong>
+                            <strong>There is no user with this ID.</strong>
                         </div>
-                        <?php } else{ ?>
-                        <div class="alert alert-error fade-in">
-                            <a href="#" class="close" data-dismiss="alert">&times;</a>
-                            <strong>No Record Found !!!</strong>
-                        </div>
-                        <?php }?>
                 <?php }?>
                 </div>
                 <!-- /.container-fluid -->

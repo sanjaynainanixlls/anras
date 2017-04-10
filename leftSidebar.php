@@ -41,16 +41,19 @@ if (!isset($_SESSION)) {
                     <a href="checkout.php"><i class="fa fa-fw fa-minus"></i> Checkout A Room</a>
                 </li>
                 <li>
-                    <a href="inventoryById.php"><i class="fa fa-fw fa-plus"></i>Allot Inventory</a>
+                    <a href="inventoryById.php"><i class="fa fa-fw fa-plus"></i> Allot Inventory</a>
                 </li>
                 <li>
-                    <a href="returnInventoryById.php"><i class="fa fa-fw fa-minus"></i>Inventory Return</a>
+                    <a href="returnInventoryById.php"><i class="fa fa-fw fa-minus"></i> Inventory Return</a>
                 </li>
                 <li>
-                    <a href="print.php"><i class="fa fa-fw fa-print"></i>Print Reciept</a>
+                    <a href="inventoryStatus.php"><i class="fa fa-fw fa-list"></i> Inventory Status</a>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-fw fa-pencil"></i> Edit Information</a>
+                    <a href="print.php"><i class="fa fa-fw fa-print"></i> Print Reciept</a>
+                </li>
+                <li>
+                    <a href="editInformationGetId.php"><i class="fa fa-fw fa-pencil"></i> Edit Information</a>
                 </li>
                 <li>
                     <a href="completeStatus.php"><i class="fa fa-fw fa-list"></i> Complete Status</a>
@@ -74,7 +77,7 @@ if (!isset($_SESSION)) {
                     <a href="addUser.php"><i class="fa fa-fw fa-user"></i> Add New User</a>
                 </li>
                 <li>
-                    <a href="tallyCash.php"><i class="fa fa-fw fa-list"></i>Tally Cash</a>
+                    <a href="tallyCash.php"><i class="fa fa-fw fa-list"></i> Tally Cash</a>
                 </li>
                 <?php
             } else if (isset($_SESSION['role']) && $_SESSION['role'] == 'RECEPTION') {
@@ -86,13 +89,16 @@ if (!isset($_SESSION)) {
                     <a href="checkout.php"><i class="fa fa-fw fa-minus"></i> Checkout A Room</a>
                 </li>
                 <li>
-                    <a href="inventoryById.php"><i class="fa fa-fw fa-plus"></i>Allot Inventory</a>
+                    <a href="inventoryById.php"><i class="fa fa-fw fa-plus"></i> Allot Inventory</a>
                 </li>
                 <li>
-                    <a href="returnInventoryById.php"><i class="fa fa-fw fa-minus"></i>Inventory Return</a>
+                    <a href="returnInventoryById.php"><i class="fa fa-fw fa-minus"></i> Inventory Return</a>
                 </li>
                 <li>
-                    <a href="print.php"><i class="fa fa-fw fa-print"></i>Print Reciept</a>
+                    <a href="inventoryStatus.php"><i class="fa fa-fw fa-list"></i> Inventory Status</a>
+                </li>
+                <li>
+                    <a href="print.php"><i class="fa fa-fw fa-print"></i> Print Reciept</a>
                 </li>
                 <li>
                     <a href="completeStatus.php"><i class="fa fa-fw fa-list"></i> Complete Status</a>
@@ -100,21 +106,16 @@ if (!isset($_SESSION)) {
                 <li>
                     <a href="roomStatus.php"><i class="fa fa-fw fa-th-list"></i> Room Status</a>
                 </li>
-                <li>
-                    <a href="tallyCash.php"><i class="fa fa-fw fa-list"></i>Tally Cash</a>
-                </li>
+                
             <?php } else if (isset($_SESSION['role']) && $_SESSION['role'] == 'INVENTORY') { ?>
                 <li>
-                    <a href="inventoryById.php"><i class="fa fa-fw fa-plus"></i>Allot Inventory</a>
+                    <a href="inventoryById.php"><i class="fa fa-fw fa-plus"></i> Allot Inventory</a>
                 </li>
                 <li>
-                    <a href="returnInventoryById.php"><i class="fa fa-fw fa-minus"></i>Inventory Return</a>
+                    <a href="returnInventoryById.php"><i class="fa fa-fw fa-minus"></i> Inventory Return</a>
                 </li>
                 <li>
                     <a href="completeStatus.php"><i class="fa fa-fw fa-list"></i> Complete Status</a>
-                </li>
-                <li>
-                    <a href="tallyCash.php"><i class="fa fa-fw fa-list"></i>Tally Cash</a>
                 </li>
             <?php } ?>
         </ul>

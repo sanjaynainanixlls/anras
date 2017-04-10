@@ -12,6 +12,10 @@ $('.completeStatusTableRow').each(function(index){
         if(roomNumber=='200'){
             $(this).find('.completeStatusTableRowRoomAlloted').text('Veranda Ground Floor Main Block');
         }
+    
+        if(roomNumber=='300'){
+            $(this).find('.roomNumberClass').text('Veranda Ground Floor A Block');
+        }
 
         if(roomNumber=='1001'){
             $(this).find('.completeStatusTableRowRoomAlloted').text('Veranda First Floor A Block');

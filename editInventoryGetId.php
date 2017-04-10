@@ -14,7 +14,7 @@ if(!isset($_SESSION))
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Edit Information</title>
+    <title>Edit Inventory</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -48,11 +48,11 @@ if(!isset($_SESSION))
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Edit Information
+                            Edit Inventory
                         </h1>
                         <ol class="breadcrumb">
                             <li class="active">
-                                <i class="fa fa-edit"></i> Edit Information
+                                <i class="fa fa-edit"></i> Edit Inventory
                             </li>
                         </ol>
                     </div>
@@ -62,14 +62,14 @@ if(!isset($_SESSION))
                 <div class="row">
                     <div class="col-lg-12">
 
-                        <form role="form" action="roomAllocation.php" method="post">
+                        <form role="form" action="editInventory" method="post">
 
                             <div class="form-group col-lg-4 col-lg-offset-4">
                                 <label>Please Enter the ID</label>
-                                <input type="hidden" name="action" value="editInformation">
-                                <input id="checkoutIDInput" type="number" name="userId"  class="form-control" name="editId" required="required" style="margin-bottom:20px">
+                                <input id="checkoutIDInput" type="number"  class="form-control" name="editId" required="required" style="margin-bottom:20px">
                             
                             <button id="checkoutSubmit" type="submit" class="btn btn-success">Submit</button>
+                            <button type="reset" class="btn btn-warning">Reset</button>
                             </div>
 
                         </form>
